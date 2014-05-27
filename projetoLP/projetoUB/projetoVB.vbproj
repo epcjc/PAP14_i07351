@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{56A2C1AE-3EAB-46BB-AE7E-D6B92DB1080D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>projetoUB.My.MyApplication</StartupObject>
+    <RootNamespace>projetoUB</RootNamespace>
+    <AssemblyName>projetoUB</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>projetoUB.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>projetoUB.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="form_gerircomentarios.Designer.vb">
+      <DependentUpon>form_gerircomentarios.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerircomentarios.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_gerirgaleria.Designer.vb">
+      <DependentUpon>form_gerirgaleria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerirgaleria.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_gerirmensagens.Designer.vb">
+      <DependentUpon>form_gerirmensagens.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerirmensagens.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_gerirnoticias.Designer.vb">
+      <DependentUpon>form_gerirnoticias.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerirnoticias.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_gerirpaginas.Designer.vb">
+      <DependentUpon>form_gerirpaginas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerirpaginas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_geriruploads.Designer.vb">
+      <DependentUpon>form_geriruploads.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_geriruploads.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_gerirutilizadores.Designer.vb">
+      <DependentUpon>form_gerirutilizadores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_gerirutilizadores.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_inseririmagemgaleria.Designer.vb">
+      <DependentUpon>form_inseririmagemgaleria.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_inseririmagemgaleria.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_inserirnoticia.Designer.vb">
+      <DependentUpon>form_inserirnoticia.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_inserirnoticia.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_inserirpagina.Designer.vb">
+      <DependentUpon>form_inserirpagina.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_inserirpagina.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_login.Designer.vb">
+      <DependentUpon>form_login.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_main.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_main.Designer.vb">
+      <DependentUpon>form_main.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form_vercompras.Designer.vb">
+      <DependentUpon>form_vercompras.vb</DependentUpon>
+    </Compile>
+    <Compile Include="form_vercompras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="form_gerircomentarios.resx">
+      <DependentUpon>form_gerircomentarios.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_gerirgaleria.resx">
+      <DependentUpon>form_gerirgaleria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_gerirmensagens.resx">
+      <DependentUpon>form_gerirmensagens.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_gerirnoticias.resx">
+      <DependentUpon>form_gerirnoticias.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_gerirpaginas.resx">
+      <DependentUpon>form_gerirpaginas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_geriruploads.resx">
+      <DependentUpon>form_geriruploads.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_gerirutilizadores.resx">
+      <DependentUpon>form_gerirutilizadores.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_inseririmagemgaleria.resx">
+      <DependentUpon>form_inseririmagemgaleria.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_inserirnoticia.resx">
+      <DependentUpon>form_inserirnoticia.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_inserirpagina.resx">
+      <DependentUpon>form_inserirpagina.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_login.resx">
+      <DependentUpon>form_login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_main.resx">
+      <DependentUpon>form_main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form_vercompras.resx">
+      <DependentUpon>form_vercompras.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="docs\anteprojeto_lp.docx" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
