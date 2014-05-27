@@ -43,4 +43,8 @@
     Private Sub GestãoToolStripMenuItem4_Click(sender As Object, e As EventArgs) Handles GestãoToolStripMenuItem4.Click
         form_gerircomentarios.Show()
     End Sub
+
+    Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
+        Application.Exit()
+    End Sub
 End Class

@@ -37,11 +37,8 @@ Public Class form_login
                         Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
                         While sqlReader.Read()
                             passbd = sqlReader("palavrap_sha1").ToString()
-                            id_utilizador = sqlReader("id").ToInt()
-                            If (sqlReader("permissao").ToInt() > 0) Then
-                                permissao = sqlReader("permissao").ToInt()
-                            End If
-                            MsgBox(passbd)
+                            id_utilizador = sqlReader("id")
+                            permissao = sqlReader("permissao")
                         End While
                     Catch ex As MySqlException
                         MsgBox("excecpçao nº 8137146")
@@ -52,11 +49,11 @@ Public Class form_login
             
 
             If (passbd = pass) Then
-                '   Session("administrador_id") =
+                'Session.Item("FirstName")
                 form_main.Show()
-                Me.Close()
+                'Me.Close()
             Else
-                MsgBox("O nome de utilizador e/ou a palavra-passe são inválidos ou não tem permissão de administrador. pass na bd = " & passbd)
+                MsgBox("O nome de utilizador e/ou a palavra-passe são inválidos ou não tem permissão de administrador.")
             End If
 
         End If

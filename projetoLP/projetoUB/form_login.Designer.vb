@@ -46,11 +46,11 @@ Partial Class form_login
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(38, 151)
+        Me.Label2.Location = New System.Drawing.Point(62, 151)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(97, 13)
+        Me.Label2.Size = New System.Drawing.Size(73, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Nome de utilizador:"
+        Me.Label2.Text = "Administrador:"
         '
         'Label3
         '
