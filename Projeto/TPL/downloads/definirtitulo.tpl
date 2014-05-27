@@ -1,0 +1,1 @@
+<a href="trabalho.php?id=()-id_trabalho-()">()-titulo-()</a>

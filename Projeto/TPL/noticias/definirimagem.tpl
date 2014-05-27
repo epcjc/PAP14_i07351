@@ -1,0 +1,1 @@
+<a href="()-caminhoimagem-()" data-rel="prettyPhoto" title=""><img src="()-caminhoimagem-()" alt="" /></a>

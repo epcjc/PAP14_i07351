@@ -1,0 +1,1 @@
+<a href="noticia.php?id=()-id_noticia-()">()-titulo-()</a>

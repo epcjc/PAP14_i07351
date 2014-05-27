@@ -1,0 +1,2 @@
+
+| <a href="admin.php">Início</a> | <a href="gerirgaleria.php">Galeria</a> | <a href="gerirutilizadores.php">Utilizadores</a> | <a href="gerirnoticias.php">Notícias</a> | <a href="gerirpaginas.php">Páginas</a> | <a href="geriruploads.php">Uploads</a> | <a href="vercompras.php">Compras</a> | <a href="gerircomentarios.php">Comentários</a> | <a href="gerirmensagens.php">Mensagens</a> | <a href="adminlogout.php">Sair</a> |

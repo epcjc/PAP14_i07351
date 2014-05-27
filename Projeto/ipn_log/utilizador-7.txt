@@ -1,0 +1,61 @@
+FALHAS NO IPN: receiver_email does not match: seller@paypalsandbox.com || mc_gross(preco) does not match: 12.34 || Não deu para confirmar duplicacao do txn_id || Parametro 2 inválido na compra ||  |||---||| --------------------------------------------------------------------------------
+[05/03/2014 5:56 PM] - https://www.sandbox.paypal.com/cgi-bin/webscr (curl)
+--------------------------------------------------------------------------------
+HTTP/1.1 200 OK
+Date: Sat, 03 May 2014 18:49:41 GMT
+Server: Apache
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: c9MWDuvPtT9GIMyPc3jwol1VSlO=GY4z54R19OyBMmHWhflii7aYIlRNx9AiQ2F30YoZbGv62dYA60zvtzQmD6EsYev_XSlOmPj67-wl2aPqY5IICw8h6rKYMGFsx_EQusszjiARuwOPRp1Ll7bCoNlXhExosxPHWs1PfL6oKG5n3A9Gea0gMTX9SyNeA3eDVMGXyqSnZA9RxSPwt8cPRez1u_wtJrQCIUd7WLD34_BDhvG25KxigFNGODYTZXXdxZLs8_vm24EADi9DNkeScyJKHHg1d7YXor_v5HPTXxTjrmW3e9IQtt5XgGSXWVGN747aR7VAorG8DMalLIBzkFSptUDHGyYTwvxU3oGtSpv0KW9YqsE9bTmjHMTbyGPFs7_VNnVy620hNls9BQdli1ivRbcnW6FmjNdwz2z1a6jdYzBGDAH0TPdlsPGIDlyi791PJFFxI6e1P8zM_cAbWVy; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: cookie_check=yes; expires=Tue, 30-Apr-2024 18:49:42 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navcmd=_notify-validate; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: navlns=0.0; expires=Mon, 02-May-2016 18:49:42 GMT; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: Apache=10.72.109.11.1399142981762294; path=/; expires=Mon, 25-Apr-44 18:49:41 GMT
+X-Cnection: close
+Set-Cookie: X-PP-SILOVER=name%3DSANDBOX3.WEB.1%26silo_version%3D880%26app%3Dslingshot%26TIME%3D1161454931; domain=.paypal.com; path=/; Secure; HttpOnly
+Set-Cookie: X-PP-SILOVER=; Expires=Thu, 01 Jan 1970 00:00:01 GMT
+Set-Cookie: Apache=10.72.128.11.1399142981749975; path=/; expires=Mon, 25-Apr-44 18:49:41 GMT
+Vary: Accept-Encoding
+Strict-Transport-Security: max-age=14400
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=UTF-8
+
+VERIFIED
+--------------------------------------------------------------------------------
+residence_country        US
+invoice                  abc1234
+address_city             San Jose
+first_name               John
+payer_id                 TESTBUYERID01
+shipping                 3.04
+mc_fee                   0.44
+txn_id                   962046144
+receiver_email           seller@paypalsandbox.com
+quantity                 1
+custom                   xyz123
+payment_date             11:48:50 3 May 2014 PDT
+address_country_code     US
+address_zip              95131
+tax                      2.02
+item_name                something
+address_name             John Smith
+last_name                Smith
+receiver_id              seller@paypalsandbox.com
+item_number              AK-1234
+verify_sign              At0Uny8ZyCEDHVD8lSE4vgD5.tpdAz2BknW6S-aS1GOHYrZbgkqJInod
+address_country          United States
+payment_status           Completed
+address_status           confirmed
+business                 seller@paypalsandbox.com
+payer_email              buyer@paypalsandbox.com
+notify_version           2.1
+txn_type                 web_accept
+test_ipn                 1
+payer_status             verified
+mc_currency              USD
+mc_gross                 12.34
+address_state            CA
+mc_gross1                9.34
+payment_type             instant
+address_street           123, any street
+
+

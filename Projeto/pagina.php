@@ -1,0 +1,341 @@
+<?php
+
+
+
+
+include_once("includes/seguranca.php");
+include_once("includes/funcoes.php");
+include_once'WideImage/lib/WideImage.php';
+$_SESSION["pagina"] = $_SERVER['PHP_SELF'];
+
+        $home = file_get_contents('HTML/umain.html');
+        
+                 //verificar se existe uma mensagem de erro para apresentar
+            $mensagemerro = '';
+            if(isset($_SESSION['mensagem_erro'])){
+                if($_SESSION['mensagem_erro'] != ''){
+                    $mensagemerro = $_SESSION['mensagem_erro'];
+                    $home = str_replace("()-mensagemerro-()", $mensagemerro, $home);
+                    $_SESSION['mensagem_erro'] = '';
+                }else{
+                    $home = str_replace("()-mensagemerro-()", $mensagemerro, $home);
+                }
+            
+            }else{
+                $home = str_replace("()-mensagemerro-()", $mensagemerro, $home);
+            }
+               //--------------------------   
+        
+         //verificar se existe uma mensagem de sucesso para apresentar
+            $mensagemsucesso = '';
+            if(isset($_SESSION['mensagem_sucesso'])){
+                if($_SESSION['mensagem_sucesso'] != ''){
+                    $mensagemsucesso = $_SESSION['mensagem_sucesso'];
+                    $home = str_replace("()-mensagemsucesso-()", $mensagemsucesso, $home);
+                    $_SESSION['mensagem_sucesso'] = '';
+                }else{
+                    $home = str_replace("<br>()-mensagemsucesso-()", $mensagemsucesso, $home);
+                }
+            
+            }else{
+                $home = str_replace("<br>()-mensagemsucesso-()", $mensagemsucesso, $home);
+            }
+               //--------------------------
+                                // conectar bd
+            global $_SG;
+            $link_bd = mysqli_connect($_SG['bd_servidor'], $_SG['bd_user'], $_SG['bd_pass'], $_SG['bd']);
+              if (!$link_bd) {
+                    die('Connect Error (' . mysqli_connect_errno() . ') '
+                    . mysqli_connect_error());
+                      }
+        //imain.html contém a página inicial com slider,  headline com informaçao, e os homeblock1 e 2.
+        //main.html contém página inicial sem slider, headline dinamico para sub menu, não contém homeblocks. 
+        //umain.html foi feito para para base de utilizadores.php, não contém side_headline
+        
+        $tpl_menu = file_get_contents('TPL/menu.tpl');
+        //$tpl_headline = file_get_contents('TPL/headlinemenu.tpl');
+       // $tpl_homeblock1 = file_get_contents('TPL/homeblock1.tpl');
+        //$tpl_homeblock2 = file_get_contents('TPL/homeblock2.tpl');
+        $tpl_footer = file_get_contents('TPL/footer.tpl');
+        $tpl_footerbottom = file_get_contents('TPL/footerbottom.tpl');
+        
+        if (!isset($_SESSION['utilizador_id']) || !isset($_SESSION['utilizador_username'])){
+            if($_SESSION['tentativaslogin'] >= 3){
+                $tpl_separadorcima = file_get_contents('TPL/separadorcima_seguro.tpl');
+            }else{
+                $tpl_separadorcima = file_get_contents('TPL/separadorcima.tpl');
+            }
+            $tpl_topopen = file_get_contents('TPL/top-open.tpl');
+            //separadorcima.tpl contém o form de login, aparece apenas quando o utilizador não está logado.
+        }else{
+            
+            $tpl_separadorcima = file_get_contents('TPL/logged.tpl');
+            $nome = $_SESSION["utilizador_username"]; //aparece o nome de utilizador no separador de cima
+            
+            $tpl_topopen = file_get_contents('TPL/top-open2.tpl');
+            //logged.tpl contém informaçoes sobre a conta, opçoes para gerir a conta, opçao para logout, aparece apenas quando o utilizador está logado.
+            //pesquisa mysql para saber o numero de mensagens
+            
+
+            
+            $cS = ($_SG['caseSensitive']) ? 'BINARY' : '';
+            $sql = "SELECT `nmensagens` FROM `".$_SG['tabela']."` WHERE ".$cS." `username` = '".$nome."' LIMIT 1";
+
+            $query = mysqli_query($link_bd, $sql);
+            if (!$query) {
+                echo "Não foi possível executar a consulta ($sql) no banco de dados: " . mysqli_error();
+        
+            }else if(mysqli_num_rows($query) == 0) {
+                $host = $_SERVER['HTTP_HOST'];
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'logout.php';
+                header ("location: http://$host$uri/$extra");
+
+            }else{
+                while ($resultado = mysqli_fetch_assoc($query)) {
+                        if($resultado["nmensagens"] == 1){
+                            $nmensagens = $resultado["nmensagens"] . ' mensagem nova';  
+                        }elseif($resultado["nmensagens"] == 0){
+                            $nmensagens = 'Não há novas mensagens';
+                        }else{
+                            $nmensagens = $resultado["nmensagens"] . ' mensagens novas';
+                        }
+
+
+                        }
+                    }
+             $id = $_SESSION["utilizador_id"];
+             $tpl_separadorcima = str_replace("()-nome-()", '<a href="perfil.php?id='.$id.'"><font color="#E0E0E0">'.htmlspecialchars($nome).'</font></a>', $tpl_separadorcima);
+                    $tpl_separadorcima = str_replace("()-nmensagens-()", $nmensagens, $tpl_separadorcima);
+                    
+                                 //encontra imagem do utilizador----------------
+             $imagempath = ''; //caminho da imagem
+             $path = 'imagens_utilizadores/'; //caminho da pasta
+             $foi = 0; //confirmaçao que tem imagem
+             //verifica se o utilizador ja tem uma imagem pequena
+             $filename = $path.$_SESSION['utilizador_id'].'_pequena.jpg';
+             if (!file_exists($filename)) { //se não existir
+
+                if(userimagem($_SESSION["utilizador_id"]) == FALSE){
+                    $imagempath = 'imagens_utilizadores/imagem.jpg';
+                }else{//encontra o caminho da imagem
+                    $imagempath = userimagem($_SESSION["utilizador_id"]);
+                    $foi = 1;
+                }
+                if($foi == 1){
+                    // Carrega a imagem a ser manipulada
+                    $imagem = WideImage::loadFromFile($imagempath);
+                   // Redimensiona a imagem
+                    $imagem = $imagem->resize(100, 75);
+                        // Guarda a imagem
+                    $pathcompleto = $path.$_SESSION['utilizador_id'].'_pequena.jpg'; // ex: 5_pequena, 82_pequena
+                    $imagem->saveToFile($pathcompleto, 40); // Coloca a imagem pequena no disco
+               }else{
+                    $pathcompleto = $path.'imagem_pequena.jpg';     
+                     }
+               
+             }else{
+                 $pathcompleto = $path.$_SESSION['utilizador_id'].'_pequena.jpg';
+             }
+                
+             //----------------------------------------------
+            
+//coloca imagem pequena na pagina
+            $htmlimg = '<img src="'.$pathcompleto.'" alt="">';
+            $tpl_separadorcima = str_replace("()-imagempequena-()", $htmlimg, $tpl_separadorcima);
+            }
+             
+        
+        
+        $home = str_replace("()-separadorcima-()", $tpl_separadorcima, $home);
+        $home = str_replace("()-top-open-()", $tpl_topopen, $home);
+        $home = str_replace("()-menu-()", $tpl_menu, $home);
+        //$home = str_replace("()-headline-()", '', $home);
+        $home = str_replace("()-homeblock1-()", '', $home);
+        $home = str_replace("()-homeblock2-()", '', $home);
+        $home = str_replace("()-footer-()", $tpl_footer, $home);
+        $home = str_replace("()-footerbottom-()", $tpl_footerbottom, $home);
+        
+        //coloca tudo no sitio excepto content
+        $tpl_content = file_get_contents('TPL/pagina.tpl');
+        //coloca content por substituir
+        //---------------------------------------------------------
+        //---------------------------FAZ SUBSTITUIÇAO DA PAGINA-----
+        //-----------------------------------------------------------
+        if (isset($_GET['id']) && is_numeric($_GET['id']) && $_GET['id'] != 0 && $_GET['id'] != NULL){
+            //pesquisa para ver se existe id da pagina e substitui se existir
+            $idpagina = $_GET['id'];
+        }else{
+        //define id da ultima pagina adicionada se existir, se não existir encaminha para inde
+            $sql="SELECT id FROM paginas ORDER BY datahora DESC LIMIT 1";
+            $query = mysqli_query($link_bd, $sql);
+            if(!$query){
+                die("nao deu a query em substituir pagina");
+            }
+            if($query->num_rows == 0){
+                //encaminha para index
+                                                //envia-o de volta para o index
+                $_SESSION['mensagem_erro'] = 'Não foram geradas páginas ainda.';
+                $host = $_SERVER['HTTP_HOST'];
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'index.php';
+                header ("location: http://$host$uri/$extra");
+            }else{
+                while($r = mysqli_fetch_assoc($query)){
+                    $idpagina = $r['id'];
+                }
+            }
+            
+        }
+            if(!isset($idpagina)){
+                //encaminha para index 
+                                //envia-o de volta para o index
+                $_SESSION['mensagem_erro'] = 'A página que procurava não existe.';
+                $host = $_SERVER['HTTP_HOST'];
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'index.php';
+                header ("location: http://$host$uri/$extra");
+            }
+            
+            $sql="SELECT * FROM paginas where id = '$idpagina'";
+            $query = mysqli_query($link_bd, $sql);
+            if(!$query){
+                die('query falhou na substituiçao da pagina');
+            }else if($query->num_rows == 0){
+                //encaminha para index 
+                                //envia-o de volta para o index
+                $_SESSION['mensagem_erro'] = 'A página que procurava não existe.';
+                $host = $_SERVER['HTTP_HOST'];
+                $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+                $extra = 'index.php';
+                header ("location: http://$host$uri/$extra");
+            }
+            while($res = mysqli_fetch_assoc($query)){
+                $nomepagina = $res['nome'];
+                $nomepagina = htmlspecialchars($nomepagina);
+                $titulopagina = $res['titulo'];
+                $titulopagina = htmlspecialchars($titulopagina);
+                $conteudopagina = $res['conteudo'];
+                $datahorapagina = $res['datahora'];
+                $userpagina = $res['id_utilizador'];
+            }
+            $tpl_content = str_replace('()-nomepagina-()', $nomepagina, $tpl_content);
+            $tpl_content = str_replace('()-titulopagina-()', $titulopagina, $tpl_content);
+            $tpl_content = str_replace('()-conteudopagina-()', $conteudopagina, $tpl_content);
+            //faz pesquisa para saber o nome do user
+            $sql = "SELECT username FROM utilizadores WHERE id = '$userpagina' LIMIT 1";
+            $query = mysqli_query($link_bd, $sql);
+            if(!$query){
+                die('nao foi possivel executar a query na pagina');
+            }else if($query->num_rows > 0){
+                while ($resultado = mysqli_fetch_assoc($query)){
+                    $username = $resultado['username'];
+                }        
+            }else{
+                $username = '';
+            }
+            $tpl_username = '<a href="perfil.php?id='.$userpagina.'">'.$username.'</a>';
+            $tpl_content = str_replace('()-userpagina-()', $tpl_username, $tpl_content);
+                
+            //Faz conversão da data
+                    //define data 
+        $tpl_dia = $datahorapagina{8} . $datahorapagina{9};
+        $tpl_mes = $datahorapagina{5} . $datahorapagina{6};
+        if(convertermes($tpl_mes)!= FALSE){
+            $tpl_mes = convertermes($tpl_mes);
+        }
+        $tpl_ano = $datahorapagina{0} . $datahorapagina{1} . $datahorapagina{2} . $datahorapagina{3};
+        $tpl_hh = $datahorapagina{11} . $datahorapagina{12};
+        $tpl_mm = $datahorapagina{14} . $datahorapagina{15};                
+
+        $tpl_content = str_replace('()-dia-()', $tpl_dia, $tpl_content);
+        $tpl_content = str_replace('()-mes-()', $tpl_mes, $tpl_content);
+        $tpl_content = str_replace('()-ano-()', $tpl_ano, $tpl_content);
+        $tpl_content = str_replace('()-HH-()', $tpl_hh, $tpl_content);
+        $tpl_content = str_replace('()-MM-()', $tpl_mm, $tpl_content); 
+        
+
+            
+
+        
+        
+        //----------------------------------------------------------
+        //---------------------ACABA SUBSTITUIÇAO
+        //_-------------------------------------------------
+
+
+        $home = str_replace("()-content-()", $tpl_content, $home);
+        
+
+        //---------------------------------------------------------------------
+        //------------COMEÇA DEFINIÇÃO das páginas geradas-----------------------
+        //----------------------------------------------------------------------
+        
+                //faz pesquisa para saber o numero de páginas na base de dados
+                $sql = "SELECT COUNT(*) FROM paginas";
+                $query = mysqli_query($link_bd, $sql);
+                if(!$query){
+                    die('ocorreu um erro na query das paginas geradas');
+                }
+                while($res = mysqli_fetch_assoc($query)){
+                    $maxpaginas = $res['COUNT(*)'];
+                }
+                if(!isset($maxpaginas)){
+                    $maxpaginas = 0;
+                }
+                if ($maxpaginas == 0 || $maxpaginas == NULL){//não mostra nada
+                    $subtext = '<li><a href="pagina.php">OUTRAS</a><ul>()-definirpaginas-()</ul></li>';
+                    $home = str_replace($subtext, '', $home);
+                }else{// define as paginas existentes
+                    
+                            $limite = 5; //maximo de paginas que apresenta no menu
+                            $sql = "SELECT * FROM paginas ORDER BY datahora DESC LIMIT $limite";
+                            $query = mysqli_query($link_bd, $sql);
+                            if(!$query){
+                                die("houve um erro na query na listagem das paginasgeradas");
+                            }
+                                //ciclo para definir as paginas
+                                $i = 1;
+                                $cont = 0; //contagem de paginas que foram inseridas
+                                $numpaginas=$query->num_rows;
+                                $tplpaginas = file_get_contents('TPL/paginas/definirpagina.tpl');
+                                
+                                while($i <= $limite){
+                                    if( $numpaginas >= $i){         
+                                    //define dados da pagina $i 
+                                        $query->data_seek($i-1);
+                                        $datarow = $query->fetch_array();
+                                        $nomepagina = $datarow['nome'];
+                                        $idpagina = $datarow['id'];
+                                        
+                                        
+                                        $home = str_replace('()-definirpaginas-()', $tplpaginas.'()-definirpaginas-()', $home);
+                                        $home = str_replace('()-nomepagina-()', htmlspecialchars($nomepagina), $home);
+                                        $home = str_replace('()-idpagina-()', $idpagina, $home);
+                                        $cont++;
+                                        }
+                                    $i++;
+                                //
+                                 }
+                                    if($maxpaginas > 5){
+                                        $linkvermais = '<li><a href="listadepaginas.php"><font color="#C8C8C8">VER MAIS</font></a></li>';
+                                        $home = str_replace('()-definirpaginas-()', $linkvermais, $home);
+                                    }else{
+                                        $home = str_replace('()-definirpaginas-()', '', $home);
+                                    }
+                    
+                       }
+                
+        
+        //------------------------------------------------------------------
+        //------------------ACABa DEFINIÇAO DAS Páginas geradas--------------
+        //------------------------------------------------------------------
+        
+        print $home; 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
+
