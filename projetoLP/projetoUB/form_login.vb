@@ -18,13 +18,12 @@ Public Class form_login
             Dim nome As String = TextBox1.Text
             Dim pass As String = TextBox2.Text
             Dim passbd As String = ""
-            Dim permissao As Integer = 0
             Dim id_utilizador As Integer = 0
 
             pass = getSHA1Hash(pass)
             'connecta a bd'
             Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
-            Dim sqlQuery As String = "SELECT id, palavrap_sha1, permissao FROM utilizadores WHERE username = '" & nome & "' AND permissao > 0"
+            Dim sqlQuery As String = "SELECT id, palavrap_sha1 FROM utilizadores WHERE username = '" & nome & "' AND permissao > 1"
             Using sqlConn As New MySqlConnection(connString)
                 Using sqlComm As New MySqlCommand()
                     With sqlComm
@@ -38,7 +37,6 @@ Public Class form_login
                         While sqlReader.Read()
                             passbd = sqlReader("palavrap_sha1").ToString()
                             id_utilizador = sqlReader("id")
-                            permissao = sqlReader("permissao")
                         End While
                     Catch ex As MySqlException
                         MsgBox("excecpçao nº 8137146")
@@ -50,6 +48,8 @@ Public Class form_login
 
             If (passbd = pass) Then
                 'Session.Item("FirstName")
+                session_id = id_utilizador
+                session_username = nome
                 form_main.Show()
                 'Me.Close()
             Else
@@ -76,3 +76,8 @@ Public Class form_login
 
     End Function
 End Class
+
+Public Module Globals
+    Public session_id As Integer = 0
+    Public session_username As String = ""
+End Module

@@ -154,6 +154,11 @@
     <Compile Include="form_vercompras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="i07351DataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>i07351DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -219,6 +224,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="docs\anteprojeto_lp.docx" />
+    <None Include="i07351DataSet.xsc">
+      <DependentUpon>i07351DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="i07351DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>i07351DataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="i07351DataSet.xss">
+      <DependentUpon>i07351DataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
