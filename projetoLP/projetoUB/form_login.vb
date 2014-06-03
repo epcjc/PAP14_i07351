@@ -75,6 +75,7 @@ Public Class form_login
         Return strResult
 
     End Function
+
 End Class
 
 Public Module Globals
