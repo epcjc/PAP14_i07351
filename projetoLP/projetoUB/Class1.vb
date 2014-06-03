@@ -6,48 +6,61 @@ Imports System.Text
 
 Public Class Class1
 
-    Public Sub download_ftp(ByVal caminhoficheiro As String)
+    Public Sub upload_ftp(ByVal _FileName As String, ByVal _UploadPath As String, ByVal _FTPUser As String, ByVal _FTPPass As String)
 
-        Dim request As FtpWebRequest = WebRequest.Create("ftp://projetos.epcjc.net/" & caminhoficheiro)
-        request.Method = WebRequestMethods.Ftp.DownloadFile
+        Dim _FileInfo As New System.IO.FileInfo(_FileName)
 
-        request.Credentials = New NetworkCredential("i07351", "trabfef5")
-        Dim response As FtpWebResponse = request.GetResponse()
+        ' Create FtpWebRequest object from the Uri provided
+        Dim _FtpWebRequest As System.Net.FtpWebRequest = CType(System.Net.FtpWebRequest.Create(New Uri(_UploadPath)), System.Net.FtpWebRequest)
 
-        Dim responseStream As Stream = response.GetResponseStream()
+        ' Provide the WebPermission Credintials
+        _FtpWebRequest.Credentials = New System.Net.NetworkCredential(_FTPUser, _FTPPass)
 
-        Dim reader As StreamReader = New StreamReader(responseStream)
+        ' By default KeepAlive is true, where the control connection is not closed
+        ' after a command is executed.
+        _FtpWebRequest.KeepAlive = False
 
-        Console.WriteLine(reader.ReadToEnd())
-        Console.WriteLine("Download Complete, status {0}", response.StatusDescription)
+        ' set timeout for 20 seconds
+        _FtpWebRequest.Timeout = 20000
 
-        reader.Close()
-        response.Close()
+        ' Specify the command to be executed.
+        _FtpWebRequest.Method = System.Net.WebRequestMethods.Ftp.UploadFile
 
-    End Sub
+        ' Specify the data transfer type.
+        _FtpWebRequest.UseBinary = True
 
-    Public Sub upload_ftp(ByVal ficheiro As String, caminho As String)
+        ' Notify the server about the size of the uploaded file
+        _FtpWebRequest.ContentLength = _FileInfo.Length
 
-        Dim request As FtpWebRequest = WebRequest.Create("ftp://projetos.epcjc.net/" & caminho)
-        request.Method = WebRequestMethods.Ftp.UploadFile
+        ' The buffer size is set to 2kb
+        Dim buffLength As Integer = 2048
+        Dim buff(buffLength - 1) As Byte
 
-        request.Credentials = New NetworkCredential("i07351", "trabfef5")
-        Dim sourcestream As StreamReader = New StreamReader(ficheiro)
+        ' Opens a file stream (System.IO.FileStream) to read the file to be uploaded
+        Dim _FileStream As System.IO.FileStream = _FileInfo.OpenRead()
 
-        Dim fileContents = Encoding.UTF8.GetBytes(sourcestream.ReadToEnd())
-        sourcestream.Close()
-        request.ContentLength = fileContents.Length
+        Try
+            ' Stream to which the file to be upload is written
+            Dim _Stream As System.IO.Stream = _FtpWebRequest.GetRequestStream()
 
-        Dim requestStream As Stream = request.GetRequestStream()
-        requestStream.Write(fileContents, 0, fileContents.Length)
-        requestStream.Close()
+            ' Read from the file stream 2kb at a time
+            Dim contentLen As Integer = _FileStream.Read(buff, 0, buffLength)
 
-        Dim response As FtpWebResponse = request.GetResponse()
+            ' Till Stream content ends
+            Do While contentLen <> 0
+                ' Write Content from the file stream to the FTP Upload Stream
+                _Stream.Write(buff, 0, contentLen)
+                contentLen = _FileStream.Read(buff, 0, buffLength)
+            Loop
 
-        Console.WriteLine("Upload File Complete, status {0}", response.StatusDescription)
-
-        response.Close()
-
+            ' Close the file stream and the Request Stream
+            _Stream.Close()
+            _Stream.Dispose()
+            _FileStream.Close()
+            _FileStream.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Upload Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
 

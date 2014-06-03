@@ -51,5 +51,10 @@
     Private Sub form_main_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         session_id = 0
         session_username = ""
+        Application.Exit()
+    End Sub
+
+    Private Sub form_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        form_login.Hide()
     End Sub
 End Class

@@ -28,7 +28,7 @@ Partial Class form_gerirmensagens
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(684, 361)
+        Me.ClientSize = New System.Drawing.Size(484, 361)
         Me.Name = "form_gerirmensagens"
         Me.Text = "Gerir mensagens"
         Me.ResumeLayout(False)
