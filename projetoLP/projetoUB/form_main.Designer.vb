@@ -44,6 +44,7 @@ Partial Class form_main
         Me.MensagensToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestãoToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestãonotíciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -154,7 +155,7 @@ Partial Class form_main
         '
         'ComentáriosToolStripMenuItem
         '
-        Me.ComentáriosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestãoToolStripMenuItem4})
+        Me.ComentáriosToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestãoToolStripMenuItem4, Me.GestãonotíciasToolStripMenuItem})
         Me.ComentáriosToolStripMenuItem.Name = "ComentáriosToolStripMenuItem"
         Me.ComentáriosToolStripMenuItem.Size = New System.Drawing.Size(87, 20)
         Me.ComentáriosToolStripMenuItem.Text = "Comentários"
@@ -162,8 +163,8 @@ Partial Class form_main
         'GestãoToolStripMenuItem4
         '
         Me.GestãoToolStripMenuItem4.Name = "GestãoToolStripMenuItem4"
-        Me.GestãoToolStripMenuItem4.Size = New System.Drawing.Size(110, 22)
-        Me.GestãoToolStripMenuItem4.Text = "Gestão"
+        Me.GestãoToolStripMenuItem4.Size = New System.Drawing.Size(163, 22)
+        Me.GestãoToolStripMenuItem4.Text = "Gestão (uploads)"
         '
         'MensagensToolStripMenuItem
         '
@@ -183,6 +184,12 @@ Partial Class form_main
         Me.SairToolStripMenuItem.Name = "SairToolStripMenuItem"
         Me.SairToolStripMenuItem.Size = New System.Drawing.Size(38, 20)
         Me.SairToolStripMenuItem.Text = "Sair"
+        '
+        'GestãonotíciasToolStripMenuItem
+        '
+        Me.GestãonotíciasToolStripMenuItem.Name = "GestãonotíciasToolStripMenuItem"
+        Me.GestãonotíciasToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.GestãonotíciasToolStripMenuItem.Text = "Gestão (notícias)"
         '
         'form_main
         '
@@ -224,5 +231,6 @@ Partial Class form_main
     Friend WithEvents MensagensToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GestãoToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SairToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GestãonotíciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

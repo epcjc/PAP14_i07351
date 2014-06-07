@@ -1,15 +1,16 @@
 ﻿Imports MySql.Data.MySqlClient
 
-Public Class form_geriruploads
-    Private Sub form_geriruploads_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'I07351DataSet.uploads' table. You can move, or remove it, as needed.
-        Me.UploadsTableAdapter.Fill(Me.I07351DataSet.uploads)
+Public Class form_gerircomentariosn
+
+    Private Sub form_gerircomentariosn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'TODO: This line of code loads data into the 'I07351DataSet.comentarios_noticias' table. You can move, or remove it, as needed.
+        Me.Comentarios_noticiasTableAdapter.Fill(Me.I07351DataSet.comentarios_noticias)
         MdiParent = form_main
 
         Dim id As Integer = ComboBox1.SelectedValue
         'connecta a bd'
         Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
-        Dim sqlQuery As String = "SELECT datahora, id_utilizador, descricao, titulo, categoria, nreports, imagem1, imagem2, imagem3, imagem4, preco, size FROM uploads WHERE id = " & id & " LIMIT 1"
+        Dim sqlQuery As String = "SELECT datahora, id_noticia, nreports, id_utilizador FROM comentarios_noticias WHERE id = " & id & " LIMIT 1"
         Using sqlConn As New MySqlConnection(connString)
             Using sqlComm As New MySqlCommand()
                 With sqlComm
@@ -22,29 +23,14 @@ Public Class form_geriruploads
                     Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
                     While sqlReader.Read()
                         Dim datahora As String = sqlReader("datahora").ToString()
-                        Dim descricao As String = sqlReader("descricao").ToString()
-                        Dim titulo As String = sqlReader("titulo").ToString()
-                        Dim categoria As String = sqlReader("categoria").ToString()
+                        Dim id_noticia As Integer = sqlReader("id_noticia")
                         Dim id_utilizador As Integer = sqlReader("id_utilizador")
                         Dim nreports As Integer = sqlReader("nreports")
-                        Dim size As Integer = sqlReader("size")
-                        Dim preco As Integer = sqlReader("preco")
-                        Dim imagem1 As String = sqlReader("imagem1").ToString()
-                        Dim imagem2 As String = sqlReader("imagem2").ToString()
-                        Dim imagem3 As String = sqlReader("imagem3").ToString()
-                        Dim imagem4 As String = sqlReader("imagem4").ToString()
-
                         'preenche labels
                         Labeldata.Text = datahora
+                        labelid.Text = id
+                        Labelid2.Text = id_noticia
                         Labelnumero.Text = nreports
-                        Labelcategoria.Text = categoria
-                        Labeltamanho.Text = size
-                        TextBox1.Text = descricao
-                        TextBox3.Text = titulo
-                        NumericUpDown1.Value = preco
-                        NumericUpDown1.ReadOnly = False
-                        TextBox1.ReadOnly = False
-                        TextBox3.ReadOnly = False
                         'pesquisa para descobrir o nome do utilizador
                         Dim sqlQuery2 As String = "SELECT username FROM utilizadores WHERE id = " & id_utilizador & " LIMIT 1"
                         Using sqlConn2 As New MySqlConnection(connString)
@@ -72,12 +58,9 @@ Public Class form_geriruploads
                 End Try
             End Using
         End Using
-        'faz download por ftp das imagens para apresentar--------------------
-
-        '--------------------------------------------------------------------
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs)
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 
@@ -85,7 +68,7 @@ Public Class form_geriruploads
         Dim id As Integer = ComboBox1.SelectedValue
         'connecta a bd'
         Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
-        Dim sqlQuery As String = "SELECT datahora, id_utilizador, descricao, titulo, categoria, nreports, imagem1, imagem2, imagem3, imagem4, preco, size FROM uploads WHERE id = " & id & " LIMIT 1"
+        Dim sqlQuery As String = "SELECT datahora, id_noticia, nreports, id_utilizador FROM comentarios_noticias WHERE id = " & id & " LIMIT 1"
         Using sqlConn As New MySqlConnection(connString)
             Using sqlComm As New MySqlCommand()
                 With sqlComm
@@ -98,29 +81,14 @@ Public Class form_geriruploads
                     Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
                     While sqlReader.Read()
                         Dim datahora As String = sqlReader("datahora").ToString()
-                        Dim descricao As String = sqlReader("descricao").ToString()
-                        Dim titulo As String = sqlReader("titulo").ToString()
-                        Dim categoria As String = sqlReader("categoria").ToString()
+                        Dim id_noticia As Integer = sqlReader("id_noticia")
                         Dim id_utilizador As Integer = sqlReader("id_utilizador")
                         Dim nreports As Integer = sqlReader("nreports")
-                        Dim size As Integer = sqlReader("size")
-                        Dim preco As Integer = sqlReader("preco")
-                        Dim imagem1 As String = sqlReader("imagem1").ToString()
-                        Dim imagem2 As String = sqlReader("imagem2").ToString()
-                        Dim imagem3 As String = sqlReader("imagem3").ToString()
-                        Dim imagem4 As String = sqlReader("imagem4").ToString()
-
                         'preenche labels
                         Labeldata.Text = datahora
+                        labelid.Text = id
+                        Labelid2.Text = id_noticia
                         Labelnumero.Text = nreports
-                        Labelcategoria.Text = categoria
-                        Labeltamanho.Text = size & "bytes"
-                        TextBox1.Text = descricao
-                        TextBox3.Text = titulo
-                        NumericUpDown1.Value = preco
-                        NumericUpDown1.ReadOnly = False
-                        TextBox1.ReadOnly = False
-                        TextBox3.ReadOnly = False
                         'pesquisa para descobrir o nome do utilizador
                         Dim sqlQuery2 As String = "SELECT username FROM utilizadores WHERE id = " & id_utilizador & " LIMIT 1"
                         Using sqlConn2 As New MySqlConnection(connString)
@@ -148,8 +116,9 @@ Public Class form_geriruploads
                 End Try
             End Using
         End Using
-        'faz download por ftp das imagens para apresentar--------------------
+    End Sub
 
-        '--------------------------------------------------------------------
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+        Me.Close()
     End Sub
 End Class

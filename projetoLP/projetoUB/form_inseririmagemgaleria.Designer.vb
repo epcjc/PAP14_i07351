@@ -31,6 +31,7 @@ Partial Class form_inseririmagemgaleria
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -38,7 +39,7 @@ Partial Class form_inseririmagemgaleria
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.Location = New System.Drawing.Point(241, 28)
+        Me.PictureBox1.Location = New System.Drawing.Point(241, 47)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 200)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -47,7 +48,7 @@ Partial Class form_inseririmagemgaleria
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(366, 234)
+        Me.Button1.Location = New System.Drawing.Point(366, 253)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 1
@@ -58,7 +59,7 @@ Partial Class form_inseririmagemgaleria
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(238, 9)
+        Me.Label1.Location = New System.Drawing.Point(238, 28)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(67, 16)
         Me.Label1.TabIndex = 2
@@ -66,7 +67,7 @@ Partial Class form_inseririmagemgaleria
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(42, 28)
+        Me.TextBox1.Location = New System.Drawing.Point(42, 47)
         Me.TextBox1.MaxLength = 100
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
@@ -77,7 +78,7 @@ Partial Class form_inseririmagemgaleria
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(39, 9)
+        Me.Label2.Location = New System.Drawing.Point(39, 28)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(83, 16)
         Me.Label2.TabIndex = 4
@@ -107,11 +108,21 @@ Partial Class form_inseririmagemgaleria
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(86, 9)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(323, 13)
+        Me.Label5.TabIndex = 25
+        Me.Label5.Text = "Nota: Apenas as últimas 10 imagens serão apresentadas na galeria"
+        '
         'form_inseririmagemgaleria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 361)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label2)
@@ -135,4 +146,5 @@ Partial Class form_inseririmagemgaleria
     Friend WithEvents Button2 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

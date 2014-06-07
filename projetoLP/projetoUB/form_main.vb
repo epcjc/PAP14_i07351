@@ -44,6 +44,10 @@
         form_gerircomentarios.Show()
     End Sub
 
+    Private Sub GestãonotíciasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles GestãonotíciasToolStripMenuItem.Click
+        form_gerircomentariosn.Show()
+    End Sub
+
     Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
         Application.Exit()
     End Sub
@@ -57,4 +61,6 @@
     Private Sub form_main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         form_login.Hide()
     End Sub
+
+
 End Class
