@@ -25,6 +25,8 @@ Partial Class form_gerirgaleria
         Me.components = New System.ComponentModel.Container()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.GaleriaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -39,12 +41,10 @@ Partial Class form_gerirgaleria
         Me.Labelenviado = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.GaleriaBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.GaleriaTableAdapter = New projetoUB.i07351DataSetTableAdapters.galeriaTableAdapter()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GaleriaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -67,6 +67,16 @@ Partial Class form_gerirgaleria
         Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
         Me.ComboBox1.TabIndex = 6
         Me.ComboBox1.ValueMember = "id"
+        '
+        'GaleriaBindingSource
+        '
+        Me.GaleriaBindingSource.DataMember = "galeria"
+        Me.GaleriaBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Label1
         '
@@ -200,16 +210,6 @@ Partial Class form_gerirgaleria
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Nota: Apenas as últimas 10 imagens serão apresentadas na galeria"
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'GaleriaBindingSource
-        '
-        Me.GaleriaBindingSource.DataMember = "galeria"
-        Me.GaleriaBindingSource.DataSource = Me.I07351DataSet
-        '
         'GaleriaTableAdapter
         '
         Me.GaleriaTableAdapter.ClearBeforeFill = True
@@ -237,9 +237,9 @@ Partial Class form_gerirgaleria
         Me.Controls.Add(Me.ComboBox1)
         Me.Name = "form_gerirgaleria"
         Me.Text = "Gerir galeria"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.GaleriaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -36,16 +36,16 @@ Partial Class form_gerirnoticias
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.NoticiasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Labelimagem = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.NoticiasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.NoticiasTableAdapter = New projetoUB.i07351DataSetTableAdapters.noticiasTableAdapter()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NoticiasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labelenviado
@@ -175,6 +175,16 @@ Partial Class form_gerirnoticias
         Me.ComboBox1.TabIndex = 24
         Me.ComboBox1.ValueMember = "id"
         '
+        'NoticiasBindingSource
+        '
+        Me.NoticiasBindingSource.DataMember = "noticias"
+        Me.NoticiasBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(38, 144)
@@ -212,16 +222,6 @@ Partial Class form_gerirnoticias
         Me.Button1.Text = "Escolher imagem"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'NoticiasBindingSource
-        '
-        Me.NoticiasBindingSource.DataMember = "noticias"
-        Me.NoticiasBindingSource.DataSource = Me.I07351DataSet
-        '
         'NoticiasTableAdapter
         '
         Me.NoticiasTableAdapter.ClearBeforeFill = True
@@ -251,8 +251,8 @@ Partial Class form_gerirnoticias
         Me.Name = "form_gerirnoticias"
         Me.Text = "Gerir Notícias"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NoticiasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

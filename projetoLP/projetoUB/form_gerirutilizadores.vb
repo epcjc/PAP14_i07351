@@ -96,4 +96,166 @@ Public Class form_gerirutilizadores
 
         '--------------------------------------------------------------------
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        'apagar
+        Dim foi As Integer = 1
+        Dim id As Integer = ComboBox1.SelectedValue
+        Dim result As Integer = MessageBox.Show("Tem a certeza que quer apagar este registo?", "Confirmação", MessageBoxButtons.YesNoCancel)
+        If result = DialogResult.Cancel Then
+            foi = 0
+        ElseIf result = DialogResult.No Then
+            foi = 0
+        End If
+
+        'pesquisa para ver a permissao do utilizador a apagar, se for administrador geral, não é possivel apagar
+        Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
+        Dim sqlQuery As String = "SELECT permissao FROM utilizadores WHERE id = " & id & " LIMIT 1"
+        Using sqlConn As New MySqlConnection(connString)
+            Using sqlComm As New MySqlCommand()
+                With sqlComm
+                    .Connection = sqlConn
+                    .CommandText = sqlQuery
+                    .CommandType = CommandType.Text
+                End With
+                Try
+                    sqlConn.Open()
+                    Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
+                    While sqlReader.Read()
+                        If (IsDBNull(sqlReader("permissao"))) Then
+                            'nada
+                        Else
+                            Dim permissao As Integer = sqlReader("permissao")
+                            If (permissao > 1) Then
+                                foi = 0
+                                MsgBox("Não é possível apagar administradores gerais.")
+                            End If
+                        End If
+
+                    End While
+                Catch ex As MySqlException
+                    MsgBox("excecpçao nº 8137146")
+                End Try
+            End Using
+        End Using
+        '-----------------------------------------
+        If (foi = 1) Then
+            'parte de apagar aqui------------
+
+            Dim Query As String = "Delete FROM utilizadores WHERE id  = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+
+            'apaga bloqueios do utilizador
+            Query = "Delete FROM bloqueios WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            Dim i2 As Integer = cmd.ExecuteNonQuery()
+
+            Query = "Delete FROM bloqueios WHERE id_bloqueado  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            'apaga mensagens_administracao do utilizador
+            Query = "Delete FROM mensagens_administracao WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            'apaga favoritos do utilizador
+            Query = "Delete FROM favoritos_utilizadores WHERE id_favorito  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            Query = "Delete FROM favoritos_utilizadores WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            Query = "Delete FROM favoritos_uploads WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            'apaga uploads do utilizador
+            Query = "Delete FROM uploads WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            'apaga noticias do utilizador
+            Query = "Delete FROM noticias WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            'apaga paginas do utilizador
+            Query = "Delete FROM paginas WHERE id_utilizador  = " & id
+            cmd = New MySqlCommand(Query, con)
+            i2 = cmd.ExecuteNonQuery()
+
+            If (i > 0) Then
+                'apaga imagens por ftp---------------
+
+                '------------------------------------
+                MsgBox("O registo foi apagado com sucesso.")
+            Else
+                MsgBox("Não foi possível apagar o registo.")
+            End If
+            con.Close()
+            If (i > 0) Then
+                'atualiza combobox
+                Me.UtilizadoresTableAdapter.Fill(Me.I07351DataSet.utilizadores)
+                id = ComboBox1.SelectedValue
+                If (id = Nothing Or id = 0) Then
+                    Labeldata.Text = ""
+                    Labelnumero.Text = ""
+                    Labelid.Text = ""
+                    TextBox1.Text = ""
+                    TextBox3.Text = ""
+                    TextBox2.Text = ""
+                    TextBox1.ReadOnly = True
+                    TextBox2.ReadOnly = True
+                    TextBox3.ReadOnly = True
+                End If
+                'connecta a bd'
+                connString = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
+                sqlQuery = "SELECT email, pais, descricao, nreports, datahora, imagem FROM utilizadores WHERE id = " & id & " LIMIT 1"
+                Using sqlConn As New MySqlConnection(connString)
+                    Using sqlComm As New MySqlCommand()
+                        With sqlComm
+                            .Connection = sqlConn
+                            .CommandText = sqlQuery
+                            .CommandType = CommandType.Text
+                        End With
+                        Try
+                            sqlConn.Open()
+                            Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
+                            While sqlReader.Read()
+                                Dim datahora As String = sqlReader("datahora").ToString()
+                                Dim descricao As String = sqlReader("descricao").ToString()
+                                Dim email As String = sqlReader("email").ToString()
+                                Dim pais As String = sqlReader("pais").ToString()
+                                Dim imagem As String = sqlReader("imagem").ToString()
+                                Dim nreports As Integer = sqlReader("nreports")
+
+                                'preenche labels
+                                Labeldata.Text = datahora
+                                Labelnumero.Text = nreports
+                                Labelid.Text = id
+                                TextBox1.Text = descricao
+                                TextBox3.Text = pais
+                                TextBox2.Text = email
+                                TextBox1.ReadOnly = False
+                                TextBox2.ReadOnly = False
+                                TextBox3.ReadOnly = False
+                            End While
+                        Catch ex As MySqlException
+                            MsgBox("excecpçao nº 8137146")
+                        End Try
+                    End Using
+                End Using
+                'faz download por ftp da imagem para apresentar--------------------
+
+                '--------------------------------------------------------------------
+            End If
+            '-------------------------------------
+        End If
+    End Sub
 End Class
