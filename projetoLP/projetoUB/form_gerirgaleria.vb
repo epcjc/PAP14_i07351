@@ -58,7 +58,11 @@ Public Class form_gerirgaleria
         End Using
 
         'faz download da imagem por ftp para exibi-la-------------
-
+        Dim c As New Class1
+        c.download_ftp("galeria/" & id & ".jpg", "galeria-" & id & ".jpg")
+        If My.Computer.FileSystem.FileExists("C:\Temp\galeria-" & id & ".jpg") Then
+            PictureBox1.ImageLocation = "C:\Temp\galeria-" & id & ".jpg"
+        End If
         '-------------------------------------------------------
     End Sub
 
@@ -67,6 +71,10 @@ Public Class form_gerirgaleria
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        'apaga labels das imagens
+        Labelimagem.Text = ""
+        PictureBox1.Image = Nothing
+
         Dim id As Integer = ComboBox1.SelectedValue
         'connecta a bd'
         Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
@@ -119,7 +127,11 @@ Public Class form_gerirgaleria
         End Using
 
         'faz download da imagem por ftp para exibi-la-------------
-
+        Dim c As New Class1
+        c.download_ftp("galeria/" & id & ".jpg", "galeria-" & id & ".jpg")
+        If My.Computer.FileSystem.FileExists("C:\Temp\galeria-" & id & ".jpg") Then
+            PictureBox1.ImageLocation = "C:\Temp\galeria-" & id & ".jpg"
+        End If
         '-------------------------------------------------------
     End Sub
 
@@ -143,7 +155,9 @@ Public Class form_gerirgaleria
             Dim i As Integer = cmd.ExecuteNonQuery()
             If (i > 0) Then
                 'apaga imagem por ftp---------------
-
+                Dim c As New Class1
+                c.apagarficheiro_ftp("galeria/" & id & ".jpg")
+                c.apagarficheiro_ftp("galeria/" & id & "_miniatura.jpg")
                 '------------------------------------
                 MsgBox("O registo foi apagado com sucesso.")
             Else
@@ -211,10 +225,33 @@ Public Class form_gerirgaleria
                 End Using
 
                 'faz download da imagem por ftp para exibi-la-------------
-
+                Dim c As New Class1
+                c.download_ftp("galeria/" & id & ".jpg", "galeria-" & id & ".jpg")
+                If My.Computer.FileSystem.FileExists("C:\Temp\galeria-" & id & ".jpg") Then
+                    PictureBox1.ImageLocation = "C:\Temp\galeria-" & id & ".jpg"
+                End If
                 '-------------------------------------------------------
             End If
             '-------------------------------------
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+        fdlg.Title = "Escolher uma imagem"
+        fdlg.InitialDirectory = "c:\"
+        fdlg.Filter = "Formato de imagem(*.jpg;*.jpeg;*.gif)|*.jpg;*.jpeg;*.gif"
+        fdlg.FilterIndex = 2
+        fdlg.RestoreDirectory = True
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            If My.Computer.FileSystem.FileExists(fdlg.FileName) Then
+                PictureBox1.ImageLocation = fdlg.FileName
+                Dim ficheiro As String = fdlg.FileName.Substring(fdlg.FileName.LastIndexOf("\") + 1)
+                Labelimagem.Text = ficheiro
+            Else
+                MessageBox.Show("O ficheiro selecionado não existe.")
+            End If
+
         End If
     End Sub
 End Class

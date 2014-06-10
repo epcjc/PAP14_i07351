@@ -124,7 +124,7 @@ Partial Class form_gerirgaleria
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 23)
         Me.Button1.TabIndex = 12
-        Me.Button1.Text = "Escolher imagem"
+        Me.Button1.Text = "Escolher nova"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2

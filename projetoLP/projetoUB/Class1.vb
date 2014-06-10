@@ -6,8 +6,10 @@ Imports System.Text
 
 Public Class Class1
 
-    Public Sub upload_ftp(ByVal _FileName As String, ByVal _UploadPath As String, ByVal _FTPUser As String, ByVal _FTPPass As String)
+    Public Sub upload_ftp(ByVal _FileName As String, ByVal _UploadPath As String)
 
+        Dim _FTPUser As String = "i07351"
+        Dim _FTPPass As String = "trabfef5"
         Dim _FileInfo As New System.IO.FileInfo(_FileName)
 
         ' Create FtpWebRequest object from the Uri provided
@@ -63,7 +65,50 @@ Public Class Class1
         End Try
     End Sub
 
+    Public Sub download_ftp(ByVal caminho As String, ficheiro As String)
+        My.Computer.Network.DownloadFile("ftp://projetos.epcjc.net/" + caminho, "C:\Temp\" + ficheiro, "i07351", "trabfef5")
+    End Sub
 
+    Public Sub apagarficheiro_ftp(ByVal caminho As String)
+
+        Dim request As System.Net.FtpWebRequest = DirectCast(System.Net.WebRequest.Create("ftp://projetos.epcjc.net/" + caminho), System.Net.FtpWebRequest)
+
+        request.Credentials = New System.Net.NetworkCredential("i07351", "trabfef5")
+
+        request.Method = System.Net.WebRequestMethods.Ftp.DeleteFile
+        Dim response As FtpWebResponse = request.GetResponse
+
+        Console.WriteLine("Delete status: {0}", response.StatusDescription)
+
+        response.Close()
+
+    End Sub
+
+    Public Sub apagarpasta_ftp(ByVal caminho As String)
+        Dim folder As String = "ftp://projetos.epcjc.net/" + caminho
+        Dim ftpReq As FtpWebRequest = WebRequest.Create(folder)
+        ftpReq.Method = WebRequestMethods.Ftp.RemoveDirectory
+        ftpReq.Credentials = New NetworkCredential("i07351", "trabfef5")
+        Dim ftpResp As FtpWebResponse = ftpReq.GetResponse
+        ftpResp.Close()
+    End Sub
+
+    Public Sub apagarconteudopasta_ftp(ByVal caminho As String)
+        Dim oFTP As FtpWebRequest = CType(FtpWebRequest.Create("ftp://projetos.epcjc.net/" & caminho), FtpWebRequest)
+        oFTP.Credentials = New NetworkCredential("i07351", "trabfef5", "2222")
+        oFTP.KeepAlive = True
+        oFTP.Method = WebRequestMethods.Ftp.ListDirectory
+        Dim response As FtpWebResponse = CType(oFTP.GetResponse, FtpWebResponse)
+        Dim sr As StreamReader = New StreamReader(response.GetResponseStream)
+        Dim str As String = sr.ReadLine
+        While str IsNot Nothing
+            apagarficheiro_ftp(str)
+            str = sr.ReadLine
+        End While
+        sr.Close()
+        response.Close()
+        oFTP = Nothing
+    End Sub
 
 
 End Class

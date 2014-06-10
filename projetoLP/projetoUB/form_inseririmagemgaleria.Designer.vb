@@ -32,6 +32,7 @@ Partial Class form_inseririmagemgaleria
         Me.Button3 = New System.Windows.Forms.Button()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Labelimagem = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -117,11 +118,20 @@ Partial Class form_inseririmagemgaleria
         Me.Label5.TabIndex = 25
         Me.Label5.Text = "Nota: Apenas as últimas 10 imagens serão apresentadas na galeria"
         '
+        'Labelimagem
+        '
+        Me.Labelimagem.AutoSize = True
+        Me.Labelimagem.Location = New System.Drawing.Point(238, 253)
+        Me.Labelimagem.Name = "Labelimagem"
+        Me.Labelimagem.Size = New System.Drawing.Size(0, 13)
+        Me.Labelimagem.TabIndex = 26
+        '
         'form_inseririmagemgaleria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 361)
+        Me.Controls.Add(Me.Labelimagem)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -147,4 +157,5 @@ Partial Class form_inseririmagemgaleria
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Labelimagem As System.Windows.Forms.Label
 End Class

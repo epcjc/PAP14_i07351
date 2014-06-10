@@ -27,6 +27,8 @@ Partial Class form_gerirutilizadores
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.UtilizadoresBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Labelid = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Labelimagem = New System.Windows.Forms.Label()
@@ -44,12 +46,10 @@ Partial Class form_gerirutilizadores
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.UtilizadoresBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.UtilizadoresTableAdapter = New projetoUB.i07351DataSetTableAdapters.utilizadoresTableAdapter()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UtilizadoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labeldata
@@ -91,6 +91,16 @@ Partial Class form_gerirutilizadores
         Me.ComboBox1.TabIndex = 63
         Me.ComboBox1.ValueMember = "id"
         '
+        'UtilizadoresBindingSource
+        '
+        Me.UtilizadoresBindingSource.DataMember = "utilizadores"
+        Me.UtilizadoresBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'Labelid
         '
         Me.Labelid.AutoSize = True
@@ -123,7 +133,7 @@ Partial Class form_gerirutilizadores
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 23)
         Me.Button1.TabIndex = 71
-        Me.Button1.Text = "Escolher imagem"
+        Me.Button1.Text = "Escolher nova"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label4
@@ -254,16 +264,6 @@ Partial Class form_gerirutilizadores
         Me.Button7.Text = "Apagar"
         Me.Button7.UseVisualStyleBackColor = True
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'UtilizadoresBindingSource
-        '
-        Me.UtilizadoresBindingSource.DataMember = "utilizadores"
-        Me.UtilizadoresBindingSource.DataSource = Me.I07351DataSet
-        '
         'UtilizadoresTableAdapter
         '
         Me.UtilizadoresTableAdapter.ClearBeforeFill = True
@@ -296,9 +296,9 @@ Partial Class form_gerirutilizadores
         Me.Controls.Add(Me.ComboBox1)
         Me.Name = "form_gerirutilizadores"
         Me.Text = "Gerir utilizadores"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UtilizadoresBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

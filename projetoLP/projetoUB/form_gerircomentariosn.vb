@@ -175,6 +175,7 @@ Public Class form_gerircomentariosn
                         End With
                         Try
                             sqlConn.Open()
+
                             Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
                             While sqlReader.Read()
                                 Dim datahora As String = sqlReader("datahora").ToString()

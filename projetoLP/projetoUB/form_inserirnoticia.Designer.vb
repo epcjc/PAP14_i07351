@@ -33,6 +33,7 @@ Partial Class form_inserirnoticia
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.Labelimagem = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -128,11 +129,20 @@ Partial Class form_inserirnoticia
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'Labelimagem
+        '
+        Me.Labelimagem.AutoSize = True
+        Me.Labelimagem.Location = New System.Drawing.Point(240, 246)
+        Me.Labelimagem.Name = "Labelimagem"
+        Me.Labelimagem.Size = New System.Drawing.Size(0, 13)
+        Me.Labelimagem.TabIndex = 16
+        '
         'form_inserirnoticia
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(484, 361)
+        Me.Controls.Add(Me.Labelimagem)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Button3)
@@ -160,4 +170,5 @@ Partial Class form_inserirnoticia
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
+    Friend WithEvents Labelimagem As System.Windows.Forms.Label
 End Class

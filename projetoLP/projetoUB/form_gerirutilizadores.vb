@@ -45,7 +45,11 @@ Public Class form_gerirutilizadores
             End Using
         End Using
         'faz download por ftp da imagem para apresentar--------------------
-
+        Dim c As New Class1
+        c.download_ftp("imagens_utilizadores/" & id & ".jpg", "utilizador-" & id & ".jpg")
+        If My.Computer.FileSystem.FileExists("C:\Temp\utilizador-" & id & ".jpg") Then
+            PictureBox1.ImageLocation = "C:\Temp\utilizador-" & id & ".jpg"
+        End If
         '--------------------------------------------------------------------
     End Sub
 
@@ -54,6 +58,10 @@ Public Class form_gerirutilizadores
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        'apaga labels das imagens
+        Labelimagem.Text = ""
+        PictureBox1.Image = Nothing
+
         Dim id As Integer = ComboBox1.SelectedValue
         'connecta a bd'
         Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
@@ -93,7 +101,11 @@ Public Class form_gerirutilizadores
             End Using
         End Using
         'faz download por ftp da imagem para apresentar--------------------
-
+        Dim c As New Class1
+        c.download_ftp("imagens_utilizadores/" & id & ".jpg", "utilizador-" & id & ".jpg")
+        If My.Computer.FileSystem.FileExists("C:\Temp\utilizador-" & id & ".jpg") Then
+            PictureBox1.ImageLocation = "C:\Temp\utilizador-" & id & ".jpg"
+        End If
         '--------------------------------------------------------------------
     End Sub
 
@@ -192,7 +204,13 @@ Public Class form_gerirutilizadores
 
             If (i > 0) Then
                 'apaga imagens por ftp---------------
-
+                Dim c As New Class1
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & ".jpg")
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & "_pequena.jpg")
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & "_perfil.jpg")
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & "_miniatura.jpg")
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & "_media.jpg")
+                c.apagarficheiro_ftp("imagens_utilizadores/" & id & "_lista.jpg")
                 '------------------------------------
                 MsgBox("O registo foi apagado com sucesso.")
             Else
@@ -252,10 +270,33 @@ Public Class form_gerirutilizadores
                     End Using
                 End Using
                 'faz download por ftp da imagem para apresentar--------------------
-
+                Dim c As New Class1
+                c.download_ftp("imagens_utilizadores/" & id & ".jpg", "utilizador-" & id & ".jpg")
+                If My.Computer.FileSystem.FileExists("C:\Temp\utilizador-" & id & ".jpg") Then
+                    PictureBox1.ImageLocation = "C:\Temp\utilizador-" & id & ".jpg"
+                End If
                 '--------------------------------------------------------------------
             End If
             '-------------------------------------
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim fdlg As OpenFileDialog = New OpenFileDialog()
+        fdlg.Title = "Escolher uma imagem"
+        fdlg.InitialDirectory = "c:\"
+        fdlg.Filter = "Formato de imagem(*.jpg;*.jpeg;*.gif)|*.jpg;*.jpeg;*.gif"
+        fdlg.FilterIndex = 2
+        fdlg.RestoreDirectory = True
+        If fdlg.ShowDialog() = DialogResult.OK Then
+            If My.Computer.FileSystem.FileExists(fdlg.FileName) Then
+                PictureBox1.ImageLocation = fdlg.FileName
+                Dim ficheiro As String = fdlg.FileName.Substring(fdlg.FileName.LastIndexOf("\") + 1)
+                Labelimagem.Text = ficheiro
+            Else
+                MessageBox.Show("O ficheiro selecionado não existe.")
+            End If
+
         End If
     End Sub
 End Class

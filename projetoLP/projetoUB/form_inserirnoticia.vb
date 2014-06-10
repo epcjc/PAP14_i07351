@@ -33,12 +33,14 @@
         Dim fdlg As OpenFileDialog = New OpenFileDialog()
         fdlg.Title = "Escolher uma imagem"
         fdlg.InitialDirectory = "c:\"
-        fdlg.Filter = "Formato de imagem(*.jpg;*.jpeg;*.png;*.gif)|*.jpg;*.jpeg;*.png;*.gif"
+        fdlg.Filter = "Formato de imagem(*.jpg;*.jpeg;*.gif)|*.jpg;*.jpeg;*.gif"
         fdlg.FilterIndex = 2
         fdlg.RestoreDirectory = True
         If fdlg.ShowDialog() = DialogResult.OK Then
             If My.Computer.FileSystem.FileExists(fdlg.FileName) Then
                 PictureBox1.ImageLocation = fdlg.FileName
+                Dim ficheiro As String = fdlg.FileName.Substring(fdlg.FileName.LastIndexOf("\") + 1)
+                Labelimagem.Text = ficheiro
             Else
                 MessageBox.Show("O ficheiro selecionado não existe.")
             End If

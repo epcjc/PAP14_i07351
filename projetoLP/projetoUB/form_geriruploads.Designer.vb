@@ -47,6 +47,8 @@ Partial Class form_geriruploads
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.UploadsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Labelnumero = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Labelcategoria = New System.Windows.Forms.Label()
@@ -60,16 +62,14 @@ Partial Class form_geriruploads
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.UploadsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.UploadsTableAdapter = New projetoUB.i07351DataSetTableAdapters.uploadsTableAdapter()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UploadsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labelimagem1
@@ -86,7 +86,7 @@ Partial Class form_geriruploads
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(95, 23)
         Me.Button1.TabIndex = 45
-        Me.Button1.Text = "Escolher imagem"
+        Me.Button1.Text = "Escolher nova"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label4
@@ -123,7 +123,7 @@ Partial Class form_geriruploads
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(95, 23)
         Me.Button2.TabIndex = 49
-        Me.Button2.Text = "Escolher imagem"
+        Me.Button2.Text = "Escolher nova"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Label2
@@ -160,7 +160,7 @@ Partial Class form_geriruploads
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(95, 23)
         Me.Button3.TabIndex = 53
-        Me.Button3.Text = "Escolher imagem"
+        Me.Button3.Text = "Escolher nova"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Label5
@@ -197,7 +197,7 @@ Partial Class form_geriruploads
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(95, 23)
         Me.Button4.TabIndex = 57
-        Me.Button4.Text = "Escolher imagem"
+        Me.Button4.Text = "Escolher nova"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Label7
@@ -296,6 +296,16 @@ Partial Class form_geriruploads
         Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
         Me.ComboBox1.TabIndex = 59
         Me.ComboBox1.ValueMember = "id"
+        '
+        'UploadsBindingSource
+        '
+        Me.UploadsBindingSource.DataMember = "uploads"
+        Me.UploadsBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Labelnumero
         '
@@ -421,16 +431,6 @@ Partial Class form_geriruploads
         Me.NumericUpDown1.Size = New System.Drawing.Size(112, 20)
         Me.NumericUpDown1.TabIndex = 80
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'UploadsBindingSource
-        '
-        Me.UploadsBindingSource.DataMember = "uploads"
-        Me.UploadsBindingSource.DataSource = Me.I07351DataSet
-        '
         'UploadsTableAdapter
         '
         Me.UploadsTableAdapter.ClearBeforeFill = True
@@ -483,9 +483,9 @@ Partial Class form_geriruploads
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UploadsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
