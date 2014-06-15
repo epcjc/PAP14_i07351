@@ -42,9 +42,11 @@ Partial Class form_gerirgaleria
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.GaleriaTableAdapter = New projetoUB.i07351DataSetTableAdapters.galeriaTableAdapter()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.GaleriaBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -114,7 +116,7 @@ Partial Class form_gerirgaleria
         Me.PictureBox1.Location = New System.Drawing.Point(253, 64)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 200)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
         '
@@ -214,6 +216,10 @@ Partial Class form_gerirgaleria
         '
         Me.GaleriaTableAdapter.ClearBeforeFill = True
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'form_gerirgaleria
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -240,6 +246,7 @@ Partial Class form_gerirgaleria
         CType(Me.GaleriaBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,4 +270,5 @@ Partial Class form_gerirgaleria
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents GaleriaBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents GaleriaTableAdapter As projetoUB.i07351DataSetTableAdapters.galeriaTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class

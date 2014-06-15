@@ -43,9 +43,11 @@ Partial Class form_gerirnoticias
         Me.Labelimagem = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.NoticiasTableAdapter = New projetoUB.i07351DataSetTableAdapters.noticiasTableAdapter()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NoticiasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labelenviado
@@ -130,7 +132,7 @@ Partial Class form_gerirnoticias
         Me.PictureBox1.Location = New System.Drawing.Point(251, 64)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 200)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 28
         Me.PictureBox1.TabStop = False
         '
@@ -226,6 +228,10 @@ Partial Class form_gerirnoticias
         '
         Me.NoticiasTableAdapter.ClearBeforeFill = True
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'form_gerirnoticias
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -253,6 +259,7 @@ Partial Class form_gerirnoticias
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.NoticiasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -277,4 +284,5 @@ Partial Class form_gerirnoticias
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents NoticiasBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents NoticiasTableAdapter As projetoUB.i07351DataSetTableAdapters.noticiasTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class

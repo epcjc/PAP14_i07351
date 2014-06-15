@@ -254,4 +254,61 @@ Public Class form_gerirgaleria
 
         End If
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'botao guardar
+        Dim foi As Integer = 1 'verifica se pode
+        If (ComboBox1.SelectedValue Is Nothing) Then
+            foi = 0
+            ErrorProvider1.SetError(ComboBox1, "Nenhum registo selecionado")
+        Else
+            ErrorProvider1.SetError(ComboBox1, "")
+        End If
+        If (TextBox1.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox1, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox1, "")
+        End If
+        If (foi = 1) Then
+            Dim id As Integer = ComboBox1.SelectedValue
+            Dim descricao As String = TextBox1.Text
+
+            'guarda alteracoes-----
+            Dim Query As String = "UPDATE galeria SET descricao = '" & descricao & "' WHERE id = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+            con.Close()
+            '---------------------
+            'redimensiona imagem para 960x473  e envia por ftp, se esta foi adicionada
+            If (Labelimagem.Text.Trim.Length > 0 And i > 0) Then
+                Dim idr As Integer = ComboBox1.SelectedValue
+                ' Get the source bitmap.
+                Dim bm_source As New Bitmap(PictureBox1.Image)
+                ' Make a bitmap for the result.
+                Dim bm_dest As New Bitmap( _
+                    CInt(960), _
+                    CInt(473))
+                ' Make a Graphics object for the result Bitmap.
+                Dim gr_dest As Graphics = Graphics.FromImage(bm_dest)
+                ' Copy the source image into the destination bitmap.
+                gr_dest.DrawImage(bm_source, 0, 0, _
+                    bm_dest.Width, _
+                    bm_dest.Height)
+                ' save the result.
+                bm_dest.Save("c:\temp\galeria-" & idr & ".jpg")
+
+                ' Envia
+                Dim c As New Class1
+                c.upload_ftp("c:\temp\galeria-" & idr & ".jpg", "galeria/" & idr & ".jpg")
+            End If
+            
+            '----------------------------------------------
+
+            MsgBox("As alterações foram guardadas com sucesso.")
+            Me.GaleriaTableAdapter.Fill(Me.I07351DataSet.galeria)
+        End If
+    End Sub
 End Class

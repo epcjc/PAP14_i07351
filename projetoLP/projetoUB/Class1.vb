@@ -8,6 +8,7 @@ Public Class Class1
 
     Public Sub upload_ftp(ByVal _FileName As String, ByVal _UploadPath As String)
 
+        _UploadPath = "ftp://projetos.epcjc.net/~i07351/" + _UploadPath
         Dim _FTPUser As String = "i07351"
         Dim _FTPPass As String = "trabfef5"
         Dim _FileInfo As New System.IO.FileInfo(_FileName)

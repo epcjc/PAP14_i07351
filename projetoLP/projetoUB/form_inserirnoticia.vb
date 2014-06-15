@@ -1,4 +1,6 @@
-﻿Public Class form_inserirnoticia
+﻿Imports MySql.Data.MySqlClient
+
+Public Class form_inserirnoticia
     Private Sub form_inserirnoticia_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MdiParent = form_main
     End Sub
@@ -24,7 +26,28 @@
 
         If (foi = 1) Then
             'insere na base de dados e envia imagem por ftp se existir---
-
+            Dim imagem As String = ""
+            If (PictureBox1.ImageLocation IsNot Nothing) Then
+                imagem = PictureBox1.ImageLocation
+            End If
+            Dim Query As String = "INSERT INTO noticias (titulo, conteudo, imagem) VALUES ('" & TextBox2.Text & "', '" & TextBox1.Text & "', '" & imagem & "'); SELECT LAST_INSERT_ID()"
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim ultimoid As Integer = CInt(cmd.ExecuteScalar())
+            'Dim i As Integer = cmd.ExecuteNonQuery()
+            If (ultimoid > 0) Then
+                'envia por ftp---------------
+                If (imagem <> "") Then
+                    Dim c As New Class1
+                    c.upload_ftp(PictureBox1.ImageLocation, "imagens_noticias/" & ultimoid & ".jpg")
+                End If
+                '------------------------------------
+                MsgBox("O registo foi inserido com sucesso.")
+            Else
+                MsgBox("Não foi possível inserir o registo.")
+            End If
+            con.Close()
             '------------------------------------------------------
         End If
     End Sub

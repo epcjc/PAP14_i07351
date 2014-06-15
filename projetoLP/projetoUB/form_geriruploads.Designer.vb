@@ -57,19 +57,18 @@ Partial Class form_geriruploads
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.UploadsTableAdapter = New projetoUB.i07351DataSetTableAdapters.uploadsTableAdapter()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.UploadsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labelimagem1
@@ -105,7 +104,7 @@ Partial Class form_geriruploads
         Me.PictureBox1.Location = New System.Drawing.Point(344, 28)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 100)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 43
         Me.PictureBox1.TabStop = False
         '
@@ -142,7 +141,7 @@ Partial Class form_geriruploads
         Me.PictureBox2.Location = New System.Drawing.Point(462, 28)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(100, 100)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox2.TabIndex = 47
         Me.PictureBox2.TabStop = False
         '
@@ -179,7 +178,7 @@ Partial Class form_geriruploads
         Me.PictureBox3.Location = New System.Drawing.Point(344, 199)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(100, 100)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox3.TabIndex = 51
         Me.PictureBox3.TabStop = False
         '
@@ -216,7 +215,7 @@ Partial Class form_geriruploads
         Me.PictureBox4.Location = New System.Drawing.Point(467, 199)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(100, 100)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox4.TabIndex = 55
         Me.PictureBox4.TabStop = False
         '
@@ -382,16 +381,6 @@ Partial Class form_geriruploads
         Me.Label10.TabIndex = 73
         Me.Label10.Text = "Descrição:"
         '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(216, 215)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(53, 16)
-        Me.Label13.TabIndex = 75
-        Me.Label13.Text = "Preço:"
-        '
         'Button5
         '
         Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -422,29 +411,22 @@ Partial Class form_geriruploads
         Me.Button7.Text = "Apagar"
         Me.Button7.UseVisualStyleBackColor = True
         '
-        'NumericUpDown1
-        '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(219, 235)
-        Me.NumericUpDown1.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.ReadOnly = True
-        Me.NumericUpDown1.Size = New System.Drawing.Size(112, 20)
-        Me.NumericUpDown1.TabIndex = 80
-        '
         'UploadsTableAdapter
         '
         Me.UploadsTableAdapter.ClearBeforeFill = True
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'form_geriruploads
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(584, 401)
-        Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Labeltamanho)
@@ -485,7 +467,7 @@ Partial Class form_geriruploads
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.UploadsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -522,12 +504,11 @@ Partial Class form_geriruploads
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents NumericUpDown1 As System.Windows.Forms.NumericUpDown
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents UploadsBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents UploadsTableAdapter As projetoUB.i07351DataSetTableAdapters.uploadsTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class

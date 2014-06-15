@@ -299,4 +299,51 @@ Public Class form_gerirutilizadores
 
         End If
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        'botao guardar
+        Dim foi As Integer = 1 'verifica se pode
+        If (ComboBox1.SelectedValue Is Nothing) Then
+            foi = 0
+            ErrorProvider1.SetError(ComboBox1, "Nenhum registo selecionado")
+        Else
+            ErrorProvider1.SetError(ComboBox1, "")
+        End If
+        If (TextBox2.Text.Trim.Length <= 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox2, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox2, "")
+        End If
+        If (TextBox3.Text.Trim.Length <= 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox3, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox3, "")
+        End If
+        If (foi = 1) Then
+            Dim id As Integer = ComboBox1.SelectedValue
+            Dim descricao As String = TextBox1.Text
+            Dim email As String = TextBox2.Text
+            Dim pais As String = TextBox3.Text
+
+            'guarda alteracoes-----
+            Dim Query As String = "UPDATE utilizadores SET descricao = '" & descricao & "', email = '" & email & "', pais = '" & pais & "' WHERE id = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+            con.Close()
+            '---------------------
+            'envia imagem por ftp se foi adicionada-----
+            If (Labelimagem.Text.Trim.Length > 0 And i > 0) Then
+                Dim c As New Class1
+                c.upload_ftp(PictureBox1.ImageLocation, "imagens_utilizadores/" & ComboBox1.SelectedValue & ".jpg")
+            End If
+            '---------------------
+
+            MsgBox("As alterações foram guardadas com sucesso.")
+            Me.UtilizadoresTableAdapter.Fill(Me.I07351DataSet.utilizadores)
+        End If
+    End Sub
 End Class

@@ -34,15 +34,17 @@ Partial Class form_gerirmensagens
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.MensagensadministracaoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.MensagensadministracaoBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.Mensagens_administracaoTableAdapter = New projetoUB.i07351DataSetTableAdapters.mensagens_administracaoTableAdapter()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.MensagensadministracaoBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labelenviado
@@ -152,6 +154,16 @@ Partial Class form_gerirmensagens
         Me.ComboBox1.TabIndex = 24
         Me.ComboBox1.ValueMember = "id"
         '
+        'MensagensadministracaoBindingSource
+        '
+        Me.MensagensadministracaoBindingSource.DataMember = "mensagens_administracao"
+        Me.MensagensadministracaoBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -192,19 +204,13 @@ Partial Class form_gerirmensagens
         Me.TextBox3.Size = New System.Drawing.Size(213, 129)
         Me.TextBox3.TabIndex = 42
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'MensagensadministracaoBindingSource
-        '
-        Me.MensagensadministracaoBindingSource.DataMember = "mensagens_administracao"
-        Me.MensagensadministracaoBindingSource.DataSource = Me.I07351DataSet
-        '
         'Mensagens_administracaoTableAdapter
         '
         Me.Mensagens_administracaoTableAdapter.ClearBeforeFill = True
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'form_gerirmensagens
         '
@@ -228,8 +234,9 @@ Partial Class form_gerirmensagens
         Me.Controls.Add(Me.ComboBox1)
         Me.Name = "form_gerirmensagens"
         Me.Text = "Gerir mensagens"
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MensagensadministracaoBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -252,4 +259,5 @@ Partial Class form_gerirmensagens
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents MensagensadministracaoBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents Mensagens_administracaoTableAdapter As projetoUB.i07351DataSetTableAdapters.mensagens_administracaoTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class

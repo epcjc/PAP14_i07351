@@ -47,9 +47,11 @@ Partial Class form_gerirutilizadores
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.UtilizadoresTableAdapter = New projetoUB.i07351DataSetTableAdapters.utilizadoresTableAdapter()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.UtilizadoresBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Labeldata
@@ -152,7 +154,7 @@ Partial Class form_gerirutilizadores
         Me.PictureBox1.Location = New System.Drawing.Point(271, 39)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(200, 200)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 69
         Me.PictureBox1.TabStop = False
         '
@@ -178,7 +180,7 @@ Partial Class form_gerirutilizadores
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(23, 301)
+        Me.TextBox1.Location = New System.Drawing.Point(23, 311)
         Me.TextBox1.MaxLength = 2000
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
@@ -268,6 +270,10 @@ Partial Class form_gerirutilizadores
         '
         Me.UtilizadoresTableAdapter.ClearBeforeFill = True
         '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
+        '
         'form_gerirutilizadores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -299,6 +305,7 @@ Partial Class form_gerirutilizadores
         CType(Me.UtilizadoresBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -327,4 +334,5 @@ Partial Class form_gerirutilizadores
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents UtilizadoresBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents UtilizadoresTableAdapter As projetoUB.i07351DataSetTableAdapters.utilizadoresTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class

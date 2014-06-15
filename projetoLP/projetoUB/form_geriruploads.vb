@@ -51,8 +51,6 @@ Public Class form_geriruploads
                         Labeltamanho.Text = size & " bytes"
                         TextBox1.Text = descricao
                         TextBox3.Text = titulo
-                        NumericUpDown1.Value = preco
-                        NumericUpDown1.ReadOnly = False
                         TextBox1.ReadOnly = False
                         TextBox3.ReadOnly = False
                         'pesquisa para descobrir o nome do utilizador
@@ -157,8 +155,6 @@ Public Class form_geriruploads
                         Labeltamanho.Text = size & " bytes"
                         TextBox1.Text = descricao
                         TextBox3.Text = titulo
-                        NumericUpDown1.Value = preco
-                        NumericUpDown1.ReadOnly = False
                         TextBox1.ReadOnly = False
                         TextBox3.ReadOnly = False
                         'pesquisa para descobrir o nome do utilizador
@@ -357,8 +353,6 @@ Public Class form_geriruploads
                     Labeltamanho.Text = ""
                     TextBox1.Text = ""
                     TextBox3.Text = ""
-                    NumericUpDown1.Value = ""
-                    NumericUpDown1.ReadOnly = True
                     TextBox1.ReadOnly = True
                     TextBox3.ReadOnly = True
                     Labelenviado.Text = ""
@@ -397,8 +391,6 @@ Public Class form_geriruploads
                                 Labeltamanho.Text = size & " bytes"
                                 TextBox1.Text = descricao
                                 TextBox3.Text = titulo
-                                NumericUpDown1.Value = preco
-                                NumericUpDown1.ReadOnly = False
                                 TextBox1.ReadOnly = False
                                 TextBox3.ReadOnly = False
                                 'pesquisa para descobrir o nome do utilizador
@@ -529,6 +521,97 @@ Public Class form_geriruploads
                 MessageBox.Show("O ficheiro selecionado não existe.")
             End If
 
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        'botao guardar
+        Dim foi As Integer = 1 'verifica se pode
+        If (ComboBox1.SelectedValue Is Nothing) Then
+            foi = 0
+            ErrorProvider1.SetError(ComboBox1, "Nenhum registo selecionado")
+        Else
+            ErrorProvider1.SetError(ComboBox1, "")
+        End If
+        If (TextBox1.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox1, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox1, "")
+        End If
+        If (TextBox3.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox3, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox3, "")
+        End If
+        If (foi = 1) Then
+            Dim id As Integer = ComboBox1.SelectedValue
+            Dim descricao As String = TextBox1.Text
+            Dim titulo As String = TextBox3.Text
+
+            'guarda alteracoes-----
+            Dim Query As String = "UPDATE uploads SET descricao = '" & descricao & "', titulo = '" & titulo & "' WHERE id = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+            con.Close()
+            '---------------------
+            'envia imagens por ftp se foram adicionadas-----
+            If (i > 0) Then
+                'pesquisa caminhos das imagens
+                Dim imagem1 As String = ""
+                Dim imagem2 As String = ""
+                Dim imagem3 As String = ""
+                Dim imagem4 As String = ""
+                'connecta a bd'
+                Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
+                Dim sqlQuery As String = "SELECT id_utilizador, imagem1, imagem2, imagem3, imagem4, nomeoriginal FROM uploads WHERE id = " & ComboBox1.SelectedValue & " LIMIT 1"
+                Using sqlConn As New MySqlConnection(connString)
+                    Using sqlComm As New MySqlCommand()
+                        With sqlComm
+                            .Connection = sqlConn
+                            .CommandText = sqlQuery
+                            .CommandType = CommandType.Text
+                        End With
+                        Try
+                            sqlConn.Open()
+                            Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
+                            While sqlReader.Read()
+                                imagem1 = sqlReader("imagem1").ToString()
+                                imagem2 = sqlReader("imagem2").ToString()
+                                imagem3 = sqlReader("imagem3").ToString()
+                                imagem4 = sqlReader("imagem4").ToString()
+                            End While
+                        Catch ex As MySqlException
+                            MsgBox("excecpçao nº 8137146")
+                        End Try
+                    End Using
+                End Using
+
+                If (Labelimagem1.Text.Trim.Length > 0) Then
+                    Dim c As New Class1
+                    c.upload_ftp(PictureBox1.ImageLocation, imagem1)
+                End If
+                If (Labelimagem2.Text.Trim.Length > 0) Then
+                    Dim c As New Class1
+                    c.upload_ftp(PictureBox2.ImageLocation, imagem2)
+                End If
+                If (Labelimagem3.Text.Trim.Length > 0) Then
+                    Dim c As New Class1
+                    c.upload_ftp(PictureBox3.ImageLocation, imagem3)
+                End If
+                If (Labelimagem4.Text.Trim.Length > 0) Then
+                    Dim c As New Class1
+                    c.upload_ftp(PictureBox4.ImageLocation, imagem4)
+                End If
+                '---------------------
+                MsgBox("As alterações foram guardadas com sucesso.")
+            Else
+                MsgBox("Houve um erro ao guardar as alterações.")
+            End If
+            Me.UploadsTableAdapter.Fill(Me.I07351DataSet.uploads)
         End If
     End Sub
 End Class

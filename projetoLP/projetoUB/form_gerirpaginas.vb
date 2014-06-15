@@ -221,4 +221,50 @@ Public Class form_gerirpaginas
             '-------------------------------------
         End If
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'botao guardar
+        Dim foi As Integer = 1 'verifica se pode
+        If (ComboBox1.SelectedValue Is Nothing) Then
+            foi = 0
+            ErrorProvider1.SetError(ComboBox1, "Nenhum registo selecionado")
+        Else
+            ErrorProvider1.SetError(ComboBox1, "")
+        End If
+        If (TextBox1.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox1, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox1, "")
+        End If
+        If (TextBox2.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox2, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox2, "")
+        End If
+        If (TextBox3.Text.Trim.Length = 0) Then
+            foi = 0
+            ErrorProvider1.SetError(TextBox3, "Este campo não pode estar vazio.")
+        Else
+            ErrorProvider1.SetError(TextBox3, "")
+        End If
+        If (foi = 1) Then
+            Dim id As Integer = ComboBox1.SelectedValue
+            Dim conteudo As String = TextBox1.Text
+            Dim titulo As String = TextBox2.Text
+            Dim nome As String = TextBox3.Text
+
+            'guarda alteracoes-----
+            Dim Query As String = "UPDATE paginas SET titulo = '" & titulo & "', nome = '" & nome & "', conteudo = '" & conteudo & "' WHERE id = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+            con.Close()
+            '---------------------
+            MsgBox("As alterações foram guardadas com sucesso.")
+            Me.PaginasTableAdapter.Fill(Me.I07351DataSet.paginas)
+        End If
+    End Sub
 End Class

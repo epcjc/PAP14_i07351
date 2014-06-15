@@ -1,4 +1,5 @@
-﻿Public Class form_inserirpagina
+﻿Imports MySql.Data.MySqlClient
+Public Class form_inserirpagina
     Private Sub form_inserirpagina_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MdiParent = form_main
     End Sub
@@ -30,7 +31,18 @@
 
         If (foi = 1) Then
             'insere na base de dados---
-
+            Dim Query As String = "INSERT INTO paginas (nome, titulo, conteudo) VALUES ('" & TextBox3.Text & "', '" & TextBox2.Text & "', '" & TextBox1.Text & "'); SELECT LAST_INSERT_ID()"
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim ultimoid As Integer = CInt(cmd.ExecuteScalar())
+            'Dim i As Integer = cmd.ExecuteNonQuery()
+            If (ultimoid > 0) Then
+                MsgBox("O registo foi inserido com sucesso.")
+            Else
+                MsgBox("Não foi possível inserir o registo.")
+            End If
+            con.Close()
             '------------------------------------------------------
         End If
     End Sub

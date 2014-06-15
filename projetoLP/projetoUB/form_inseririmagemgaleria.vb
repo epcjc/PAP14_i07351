@@ -1,4 +1,6 @@
-﻿Public Class form_inseririmagemgaleria
+﻿Imports MySql.Data.MySqlClient
+Imports System.Drawing
+Public Class form_inseririmagemgaleria
     Private Sub form_inseririmagemgaleria_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         MdiParent = form_main
     End Sub
@@ -43,7 +45,45 @@
 
         If (foi = 1) Then
             'insere na base de dados e envia imagem por ftp---
+            Dim imagem As String = "porsubstituir"
+            Dim Query As String = "INSERT INTO galeria (descricao, imagem) VALUES ('" & TextBox1.Text & "', '" & imagem & "'); SELECT LAST_INSERT_ID()"
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim ultimoid As Integer = CInt(cmd.ExecuteScalar())
+            'Dim i As Integer = cmd.ExecuteNonQuery()
+            If (ultimoid > 0) Then
+                'atualiza o campo imagem no registo
+                Dim caminhoimagem As String = "galeria/" & ultimoid & ".jpg"
+                Query = "UPDATE galeria SET imagem = '" & caminhoimagem & "' WHERE id = " & ultimoid
+                cmd = New MySqlCommand(Query, con)
+                Dim i As Integer = cmd.ExecuteNonQuery()
+                'redimensiona imagem para 960x473 e envia por ftp---------------
 
+                ' Get the source bitmap.
+                Dim bm_source As New Bitmap(PictureBox1.Image)
+                ' Make a bitmap for the result.
+                Dim bm_dest As New Bitmap( _
+                    CInt(960), _
+                    CInt(473))
+                ' Make a Graphics object for the result Bitmap.
+                Dim gr_dest As Graphics = Graphics.FromImage(bm_dest)
+                ' Copy the source image into the destination bitmap.
+                gr_dest.DrawImage(bm_source, 0, 0, _
+                    bm_dest.Width, _
+                    bm_dest.Height)
+                ' save the result.
+                bm_dest.Save("c:\temp\galeria-" & ultimoid & ".jpg")
+
+                ' Envia
+                Dim c As New Class1
+                c.upload_ftp("c:\temp\galeria-" & ultimoid & ".jpg", "galeria/" & ultimoid & ".jpg")
+                '------------------------------------
+                MsgBox("O registo foi inserido com sucesso.")
+            Else
+                MsgBox("Não foi possível inserir o registo.")
+            End If
+            con.Close()
             '------------------------------------------------------
         End If
     End Sub

@@ -213,4 +213,30 @@ Public Class form_gerirmensagens
             '-------------------------------------
         End If
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        'botao guardar
+        Dim foi As Integer = 1 'verifica se pode
+        If (ComboBox1.SelectedValue Is Nothing) Then
+            foi = 0
+            ErrorProvider1.SetError(ComboBox1, "Nenhum registo selecionado")
+        End If
+        If (foi = 1) Then
+            Dim id As Integer = ComboBox1.SelectedValue
+            Dim resposta As String = TextBox3.Text
+
+            'guarda resposta-----
+            Dim Query As String = "UPDATE mensagens_administracao SET resposta = '" & resposta & "', respondida = 1 WHERE id = " & id
+            Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
+            con.Open()
+            Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
+            Dim i As Integer = cmd.ExecuteNonQuery()
+            con.Close()
+            'envia uma mensagem com a resposta para o utilizador que enviou a mensagem, e aumenta um nmensagens nesse utilizador
+
+            '---------------------
+            MsgBox("As alterações foram guardadas com sucesso.")
+            Me.Mensagens_administracaoTableAdapter.Fill(Me.I07351DataSet.mensagens_administracao)
+        End If
+    End Sub
 End Class

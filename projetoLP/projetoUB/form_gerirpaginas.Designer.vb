@@ -25,6 +25,8 @@ Partial Class form_gerirpaginas
         Me.components = New System.ComponentModel.Container()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.PaginasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Labelenviado = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Labeldata = New System.Windows.Forms.Label()
@@ -38,11 +40,11 @@ Partial Class form_gerirpaginas
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
-        Me.PaginasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PaginasTableAdapter = New projetoUB.i07351DataSetTableAdapters.paginasTableAdapter()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.PaginasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label2
@@ -65,6 +67,16 @@ Partial Class form_gerirpaginas
         Me.ComboBox1.Size = New System.Drawing.Size(128, 21)
         Me.ComboBox1.TabIndex = 26
         Me.ComboBox1.ValueMember = "id"
+        '
+        'PaginasBindingSource
+        '
+        Me.PaginasBindingSource.DataMember = "paginas"
+        Me.PaginasBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Labelenviado
         '
@@ -192,19 +204,13 @@ Partial Class form_gerirpaginas
         Me.Button3.Text = "Apagar"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PaginasBindingSource
-        '
-        Me.PaginasBindingSource.DataMember = "paginas"
-        Me.PaginasBindingSource.DataSource = Me.I07351DataSet
-        '
         'PaginasTableAdapter
         '
         Me.PaginasTableAdapter.ClearBeforeFill = True
+        '
+        'ErrorProvider1
+        '
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'form_gerirpaginas
         '
@@ -228,8 +234,9 @@ Partial Class form_gerirpaginas
         Me.Controls.Add(Me.ComboBox1)
         Me.Name = "form_gerirpaginas"
         Me.Text = "Gerir páginas"
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PaginasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -252,4 +259,5 @@ Partial Class form_gerirpaginas
     Friend WithEvents I07351DataSet As projetoUB.i07351DataSet
     Friend WithEvents PaginasBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents PaginasTableAdapter As projetoUB.i07351DataSetTableAdapters.paginasTableAdapter
+    Friend WithEvents ErrorProvider1 As System.Windows.Forms.ErrorProvider
 End Class
