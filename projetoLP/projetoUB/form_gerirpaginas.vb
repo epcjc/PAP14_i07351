@@ -264,7 +264,6 @@ Public Class form_gerirpaginas
             con.Close()
             '---------------------
             MsgBox("As alterações foram guardadas com sucesso.")
-            Me.PaginasTableAdapter.Fill(Me.I07351DataSet.paginas)
         End If
     End Sub
 End Class

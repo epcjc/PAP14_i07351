@@ -224,19 +224,99 @@ Public Class form_gerirmensagens
         If (foi = 1) Then
             Dim id As Integer = ComboBox1.SelectedValue
             Dim resposta As String = TextBox3.Text
-
+            Dim resposta_bd As String = resposta & " | Resposta enviada por: " & session_username
             'guarda resposta-----
-            Dim Query As String = "UPDATE mensagens_administracao SET resposta = '" & resposta & "', respondida = 1 WHERE id = " & id
+            Dim Query As String = "UPDATE mensagens_administracao SET resposta = '" & resposta_bd & "', respondida = 1 WHERE id = " & id
             Dim con As MySqlConnection = New MySqlConnection("server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351")
             con.Open()
             Dim cmd As MySqlCommand = New MySqlCommand(Query, con)
             Dim i As Integer = cmd.ExecuteNonQuery()
             con.Close()
             'envia uma mensagem com a resposta para o utilizador que enviou a mensagem, e aumenta um nmensagens nesse utilizador
+            Dim id_utilizador As Integer = 0
+            Dim nmensagens As Integer = 0
+            Dim titulo As String = ""
+            Dim conteudo As String = ""
+            Dim titulomsg As String = ""
+            Dim msg As String = ""
+            Dim erro As Integer = 0
+            'encontra o id do utilizador, e depois o nmensagens desse utilizador
+            'connecta a bd'
+            Dim connString As String = "server=projetos.epcjc.net; user id=i07351; password=amorim; database=i07351"
+            Dim sqlQuery As String = "SELECT id_utilizador, titulo, conteudo FROM mensagens_administracao WHERE id = " & id
+            Using sqlConn As New MySqlConnection(connString)
+                Using sqlComm As New MySqlCommand()
+                    With sqlComm
+                        .Connection = sqlConn
+                        .CommandText = sqlQuery
+                        .CommandType = CommandType.Text
+                    End With
+                    Try
+                        sqlConn.Open()
+                        Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
+                        While sqlReader.Read()
+                            id_utilizador = sqlReader("id_utilizador")
+                            titulo = sqlReader("titulo").ToString()
+                            conteudo = sqlReader("conteudo").ToString()
+
+                            titulomsg = "Administracao Digiart - Resposta"
+                            msg = "<font size=""+1"">Resposta enviada por: " & session_username & "</font><br><br><br><h5><font size=""+1"">Mensagem:</font><br> <font color=""#787878"">" & titulo & "</font></h5>" & conteudo & "<br><br><h5><font size=""+1"">Resposta:</font></h5> " & resposta
+
+                            'insere mensagem
+                            Query = "INSERT INTO mensagens (id_utilizadorE,id_utilizadorR,apagou_utilizadorE,titulo,conteudo) VALUES (0," & id_utilizador & ",1,'" & titulomsg & "','" & msg & "'); SELECT LAST_INSERT_ID()"
+                            con.Open()
+                            cmd = New MySqlCommand(Query, con)
+                            Dim ultimoid As Integer = CInt(cmd.ExecuteScalar())
+                            'Dim i As Integer = cmd.ExecuteNonQuery()
+                            If (ultimoid > 0) Then
+                            Else
+                                MsgBox("Não foi possível inserir o registo.")
+                                erro = 1
+                            End If
+                            con.Close()
+                        End While
+                    Catch ex As MySqlException
+                        MsgBox("excecpçao nº 8137146")
+                    End Try
+                End Using
+            End Using
+            sqlQuery = "SELECT nmensagens FROM utilizadores WHERE id = " & id_utilizador
+            Using sqlConn As New MySqlConnection(connString)
+                Using sqlComm As New MySqlCommand()
+                    With sqlComm
+                        .Connection = sqlConn
+                        .CommandText = sqlQuery
+                        .CommandType = CommandType.Text
+                    End With
+                    Try
+                        sqlConn.Open()
+                        Dim sqlReader As MySqlDataReader = sqlComm.ExecuteReader()
+                        While sqlReader.Read()
+                            nmensagens = sqlReader("nmensagens") + 1
+                            'altera nmensagens no utilizador
+                            Query = "UPDATE utilizadores SET nmensagens = " & nmensagens & " WHERE id = " & id_utilizador
+                            con.Open()
+                            cmd = New MySqlCommand(Query, con)
+                            Dim ii As Integer = cmd.ExecuteNonQuery()
+                            If (ii > 0) Then
+                            Else
+                                MsgBox("Não foi possível inserir o registo.")
+                                erro = 1
+                            End If
+                            con.Close()
+                        End While
+                    Catch ex As MySqlException
+                        MsgBox("excecpçao nº 4d37146")
+                    End Try
+                End Using
+            End Using
+
 
             '---------------------
-            MsgBox("As alterações foram guardadas com sucesso.")
-            Me.Mensagens_administracaoTableAdapter.Fill(Me.I07351DataSet.mensagens_administracao)
+            If (erro = 0) Then
+                MsgBox("As alterações foram guardadas com sucesso.")
+            End If
+
         End If
     End Sub
 End Class

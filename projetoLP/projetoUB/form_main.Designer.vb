@@ -41,16 +41,18 @@ Partial Class form_main
         Me.VerComprasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComentáriosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestãoToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GestãonotíciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MensagensToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GestãoToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SairToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.GestãonotíciasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SairToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HelpProvider1 = New System.Windows.Forms.HelpProvider()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UtilizadoresToolStripMenuItem, Me.UtilizadoresToolStripMenuItem1, Me.NotíciasToolStripMenuItem, Me.PáginasToolStripMenuItem, Me.UploadsToolStripMenuItem, Me.ComprasToolStripMenuItem, Me.ComentáriosToolStripMenuItem, Me.MensagensToolStripMenuItem, Me.SairToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UtilizadoresToolStripMenuItem, Me.UtilizadoresToolStripMenuItem1, Me.NotíciasToolStripMenuItem, Me.PáginasToolStripMenuItem, Me.UploadsToolStripMenuItem, Me.ComprasToolStripMenuItem, Me.ComentáriosToolStripMenuItem, Me.MensagensToolStripMenuItem, Me.SairToolStripMenuItem, Me.SairToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(884, 24)
@@ -166,6 +168,12 @@ Partial Class form_main
         Me.GestãoToolStripMenuItem4.Size = New System.Drawing.Size(163, 22)
         Me.GestãoToolStripMenuItem4.Text = "Gestão (uploads)"
         '
+        'GestãonotíciasToolStripMenuItem
+        '
+        Me.GestãonotíciasToolStripMenuItem.Name = "GestãonotíciasToolStripMenuItem"
+        Me.GestãonotíciasToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+        Me.GestãonotíciasToolStripMenuItem.Text = "Gestão (notícias)"
+        '
         'MensagensToolStripMenuItem
         '
         Me.MensagensToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GestãoToolStripMenuItem5})
@@ -182,14 +190,14 @@ Partial Class form_main
         'SairToolStripMenuItem
         '
         Me.SairToolStripMenuItem.Name = "SairToolStripMenuItem"
-        Me.SairToolStripMenuItem.Size = New System.Drawing.Size(38, 20)
-        Me.SairToolStripMenuItem.Text = "Sair"
+        Me.SairToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
+        Me.SairToolStripMenuItem.Text = "Ajuda"
         '
-        'GestãonotíciasToolStripMenuItem
+        'SairToolStripMenuItem1
         '
-        Me.GestãonotíciasToolStripMenuItem.Name = "GestãonotíciasToolStripMenuItem"
-        Me.GestãonotíciasToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-        Me.GestãonotíciasToolStripMenuItem.Text = "Gestão (notícias)"
+        Me.SairToolStripMenuItem1.Name = "SairToolStripMenuItem1"
+        Me.SairToolStripMenuItem1.Size = New System.Drawing.Size(38, 20)
+        Me.SairToolStripMenuItem1.Text = "Sair"
         '
         'form_main
         '
@@ -232,5 +240,7 @@ Partial Class form_main
     Friend WithEvents GestãoToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SairToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GestãonotíciasToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SairToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HelpProvider1 As System.Windows.Forms.HelpProvider
 
 End Class

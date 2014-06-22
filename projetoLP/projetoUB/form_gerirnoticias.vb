@@ -321,7 +321,6 @@ Public Class form_gerirnoticias
             End If
             '----------------------------------------------
             MsgBox("As alterações foram guardadas com sucesso.")
-            Me.NoticiasTableAdapter.Fill(Me.I07351DataSet.noticias)
         End If
     End Sub
 End Class

@@ -49,7 +49,8 @@
     End Sub
 
     Private Sub SairToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem.Click
-        Application.Exit()
+        'ajuda
+        Help.ShowHelp(Me, "ajuda.chm")
     End Sub
 
     Private Sub form_main_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
@@ -63,4 +64,9 @@
     End Sub
 
 
+    Private Sub SairToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles SairToolStripMenuItem1.Click
+        session_id = 0
+        session_username = ""
+        Application.Exit()
+    End Sub
 End Class

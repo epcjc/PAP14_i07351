@@ -308,7 +308,6 @@ Public Class form_gerirgaleria
             '----------------------------------------------
 
             MsgBox("As alterações foram guardadas com sucesso.")
-            Me.GaleriaTableAdapter.Fill(Me.I07351DataSet.galeria)
         End If
     End Sub
 End Class

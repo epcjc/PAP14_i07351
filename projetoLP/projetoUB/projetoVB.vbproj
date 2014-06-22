@@ -233,6 +233,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ajuda.chm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="docs\anteprojeto_lp.docx" />
     <None Include="i07351DataSet.xsc">
       <DependentUpon>i07351DataSet.xsd</DependentUpon>

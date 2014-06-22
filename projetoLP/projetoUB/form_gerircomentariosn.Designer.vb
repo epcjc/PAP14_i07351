@@ -27,8 +27,8 @@ Partial Class form_gerircomentariosn
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.ComentariosnoticiasBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.I07351DataSet = New projetoUB.i07351DataSet()
         Me.Comentarios_noticiasTableAdapter = New projetoUB.i07351DataSetTableAdapters.comentarios_noticiasTableAdapter()
         Me.Labelid2 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -40,8 +40,8 @@ Partial Class form_gerircomentariosn
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ComentariosnoticiasBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button2
@@ -68,7 +68,7 @@ Partial Class form_gerircomentariosn
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(92, 51)
+        Me.Label2.Location = New System.Drawing.Point(12, 51)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(154, 16)
         Me.Label2.TabIndex = 17
@@ -79,22 +79,22 @@ Partial Class form_gerircomentariosn
         Me.ComboBox1.DataSource = Me.ComentariosnoticiasBindingSource
         Me.ComboBox1.DisplayMember = "conteudo"
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(95, 70)
+        Me.ComboBox1.Location = New System.Drawing.Point(12, 70)
         Me.ComboBox1.MaxLength = 2000
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(309, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(460, 21)
         Me.ComboBox1.TabIndex = 16
         Me.ComboBox1.ValueMember = "id"
-        '
-        'I07351DataSet
-        '
-        Me.I07351DataSet.DataSetName = "i07351DataSet"
-        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'ComentariosnoticiasBindingSource
         '
         Me.ComentariosnoticiasBindingSource.DataMember = "comentarios_noticias"
         Me.ComentariosnoticiasBindingSource.DataSource = Me.I07351DataSet
+        '
+        'I07351DataSet
+        '
+        Me.I07351DataSet.DataSetName = "i07351DataSet"
+        Me.I07351DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Comentarios_noticiasTableAdapter
         '
@@ -216,8 +216,8 @@ Partial Class form_gerircomentariosn
         Me.Controls.Add(Me.ComboBox1)
         Me.Name = "form_gerircomentariosn"
         Me.Text = "Gerir comentários das notícias"
-        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ComentariosnoticiasBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.I07351DataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

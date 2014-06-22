@@ -343,7 +343,6 @@ Public Class form_gerirutilizadores
             '---------------------
 
             MsgBox("As alterações foram guardadas com sucesso.")
-            Me.UtilizadoresTableAdapter.Fill(Me.I07351DataSet.utilizadores)
         End If
     End Sub
 End Class

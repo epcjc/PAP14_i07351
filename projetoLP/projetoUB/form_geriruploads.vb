@@ -611,7 +611,6 @@ Public Class form_geriruploads
             Else
                 MsgBox("Houve um erro ao guardar as alterações.")
             End If
-            Me.UploadsTableAdapter.Fill(Me.I07351DataSet.uploads)
         End If
     End Sub
 End Class
